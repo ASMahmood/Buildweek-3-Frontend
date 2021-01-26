@@ -1,18 +1,70 @@
 import React from "react";
-import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { Container, Row, Col, Spinner,Image,Button,Modal,Form } from "react-bootstrap";
 import CreateFeed from "./CreateFeed";
 import HomeProfile from "./HomeProfile";
 import HomeRight from "./HomeRight";
-import PostsColumn from "./PostsColumn";
-import SavedPosts from "./SavedPosts";
-import "./styles/FeedPage.css";
+import {RiPencilFill } from "react-icons/ri";
+import {AiOutlineDelete } from "react-icons/ai";
 
+import "./styles/FeedPage.css";
 class FeedPage extends React.Component {
   state = {
     postArray: [],
-   
+    show:false,
+    postIdForEdit:"",
+    currentPostForEdit:{},
+    editedText:""
   };
 
+  deletePost = async (id) => {
+    await fetch(
+      `https://buildweek-3.herokuapp.com/post/${id}`,
+      {
+        method: 'DELETE'
+      }
+    );
+    this.fetchPosts()
+  }
+  openEditPostModal = async (id) => {
+   console.log(id);
+   
+   try {
+    let response = await fetch(
+      `https://buildweek-3.herokuapp.com/post/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+        },
+      }
+    );
+    let parsedResponse = await response.json();
+    this.setState({ currentPostForEdit: parsedResponse}, () => {
+      console.log(this.state.currentPostForEdit);
+    });
+    this.setState({show:true})
+  } catch (error) {
+    console.log("problem with getting psots ->", error);
+  }
+  }
+  updatePost = async () => {
+   let editedPost = this.state.currentPostForEdit
+   editedPost.text = this.state.editedText
+   this.setState({currentPostForEdit:editedPost})
+   let requestBody = {text:this.state.editedText,username:this.state.currentPostForEdit.username,user_id:this.state.currentPostForEdit.user_id._id,image:this.state.currentPostForEdit.image}
+   
+   //fetching`
+let response = await fetch(
+  `https://buildweek-3.herokuapp.com/post/${this.state.currentPostForEdit._id}`,
+  {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestBody)
+  }
+);
+await this.fetchPosts()
+  }
   componentDidMount = () => {
     this.fetchPosts();
    // this.fetchProfiles();
@@ -43,6 +95,7 @@ class FeedPage extends React.Component {
 
   render() {
     return (
+      <>
       <Container style={{ marginTop: "2rem" }}>
         <Row id="hopesAndDreams">
           <Col md={2}>
@@ -62,7 +115,21 @@ class FeedPage extends React.Component {
             <Row className="d-flex justify-content-center">
             {this.state.postArray.map(post => 
                (<Container className = "postContainer" >
-                 123
+                 <Row className = "userPostRow" >
+                   <Col sm ={2}><img src = {post.user_id.image} className = "profilePicPost"/> </Col>
+                   <Col sm ={8}>
+                     <Row className = "postUsername"><p>{post.user_id.username}</p></Row>
+                     <Row className = "postCreatedAt"><p>{post.createdAt}</p></Row>
+                   </Col>
+                   <Col sm ={1}><RiPencilFill className = "pen" onClick = {()=> this.openEditPostModal(post._id)}/></Col>
+                   <Col sm ={1}><AiOutlineDelete className = "bin" onClick = {()=> this.deletePost(post._id)}/></Col>
+                   </Row>
+                   <Row>
+                     <Col sm={2}></Col>
+                     <Col sm={10} classNam = "postText"> <p>{post.text}</p></Col>
+                     <Col sm={2}></Col>
+               
+                     </Row>
                  </Container> 
                )
             )}
@@ -74,6 +141,35 @@ class FeedPage extends React.Component {
         </Row>
         <hr />
       </Container>
+
+      <Modal
+        show={this.state.show}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Post</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form>
+   <Form.Group controlId="exampleForm.ControlTextarea1">
+    <Form.Label>Example textarea</Form.Label>
+    <Form.Control as="textarea" rows={3} defaultValue = {this.state.currentPostForEdit.text} onChange={(e) => this.setState({editedText:e.currentTarget.value})}/>
+  </Form.Group>
+  </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary"  onClick = {()=> this.setState({show:false})}>
+            Close
+          </Button>
+          <Button variant="primary" onClick = {() => this.updatePost()}>Save</Button>
+        </Modal.Footer>
+      </Modal>
+
+</>
+
+//modal for edit post
+
     );
   }
 }
