@@ -15,3 +15,8 @@
     z-index: 10;
   }
 }
+.postContainer{
+  border: 1px solid black;
+  margin-top: 10px;
+  border-radius: 10px;
+}

@@ -38,13 +38,12 @@ class StartPost extends Component {
     console.log(this.state.image);
     try {
       const response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/posts",
+        "https://buildweek-3.herokuapp.com/post",
         {
           method: "POST",
           body: JSON.stringify(this.state.post),
           headers: new Headers({
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
           }),
         }
       );

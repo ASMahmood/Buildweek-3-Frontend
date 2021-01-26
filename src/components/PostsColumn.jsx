@@ -29,14 +29,16 @@ class PostsColumn extends React.Component {
       }
     }, 500);
   }
-
+  componentDidMount() {
+    console.log("Here ->" + this.props.posts)
+  }
   componentWillMount() {
     this.loadPosts();
   }
 
   loadPosts = () => {
     this.setState({ isLoading: true });
-    const nextPosts = this.props.postArray.splice(0, 5);
+    const nextPosts = this.props.postArray.splice(0, 2);
 
     this.setState({
       hasMore: this.props.postArray.length,
