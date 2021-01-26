@@ -1,0 +1,85 @@
+#LearningRecomend {
+  background-color: white;
+  border-radius: 8px;
+  border: solid 1px #deddda;
+}
+
+#LearningRecomend .playButton {
+  position: absolute;
+  top: 13px;
+  left: 48px;
+  border-radius: 100px;
+}
+#LearningRecomend .playButton svg {
+  border-radius: 100px;
+  color: white;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 0px;
+}
+#LearningRecomend .playButton svg path {
+  margin: 0px;
+}
+
+#LearningRecomend > .row:last-child h6 {
+  margin: 0;
+  color: #0a66c2;
+  font-weight: 600;
+}
+
+#LearningRecomend .row:first-of-type {
+  padding-top: 20px;
+  padding-bottom: 10px;
+  padding-left: 15px;
+}
+
+#LearningRecomend .row:nth-of-type(2) {
+  padding-bottom: 15px;
+  padding-left: 15px;
+}
+
+#LearningRecomend .row:last-of-type {
+  padding: 10px 15px;
+  border-top: 1px solid #deddda;
+}
+
+#LearningRecomend span {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 17px;
+}
+#LearningRecomend span.text-muted {
+  font-size: 12px;
+  font-weight: normal;
+  line-height: normal;
+}
+#LearningRecomend .RecomendItem {
+  height: 70px;
+}
+#LearningRecomend .RecomendItem.lastItem {
+  margin-bottom: 15px;
+  height: 70px;
+}
+#LearningRecomend .pl-4:hover > span:first-of-type {
+  text-decoration: underline;
+  cursor: pointer;
+}
+#LearningRecomend .row:last-of-type:hover {
+  background-color: #0983fd38;
+  cursor: pointer;
+}
+#LearningRecomend .learningLogo {
+  background-color: #0a66c2;
+  color: white;
+}
+#LearningRecomend .learningLogo {
+  background-color: #0a66c2;
+  color: white;
+  width: 14px;
+  height: 17px;
+  text-align: center;
+  border-radius: 1px;
+}
+#LearningRecomend .wideLearning {
+  font-size: 11px;
+  letter-spacing: 2px;
+}

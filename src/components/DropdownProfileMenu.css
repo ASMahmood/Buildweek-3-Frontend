@@ -1,0 +1,36 @@
+#profileDrop.show {
+  padding: 0;
+  width: 330px;
+}
+#profileDrop .card-header {
+  padding: 10px 20px;
+  height: auto;
+  background-color: white;
+}
+#profileDrop .btn {
+  padding: 0 12px;
+  color: black;
+}
+#profileDrop .btn svg {
+  width: 30px;
+  height: 30px;
+}
+#profileDrop .list-group-item {
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 1px;
+  padding: 16px 0px;
+  color: grey;
+}
+#profileDrop .list-group {
+  padding: 0px 16px;
+}
+#profileDrop span {
+  font-weight: 600;
+}
+.btn:focus {
+  box-shadow: none;
+}
+body {
+  background-color: #f3f2ef;
+}

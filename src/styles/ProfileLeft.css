@@ -1,0 +1,125 @@
+body {
+  color: #4b4b4b;
+}
+.profile-profile-section {
+  background-color: white;
+  border: 1px solid #deddda;
+  border-radius: 8px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  /* max-height: 460px; */
+}
+.coverImgHolder {
+  height: 200px;
+  object-fit: cover;
+}
+.coverImg {
+  height: 200px;
+  width: 100%;
+  border-radius: 8px 8px 0px 0px;
+}
+.profilePic {
+  border-radius: 50%;
+  border: 5px solid white;
+  z-index: 5;
+  position: relative;
+  top: -90px;
+  left: 40px;
+  height: 140px;
+  width: 140px;
+}
+.profilePic img {
+  border-radius: 50%;
+  height: 140px;
+  width: 140px;
+  position: relative;
+  left: -5px;
+  top: -4px;
+  object-fit: cover;
+}
+.profile-info {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  top: -130px;
+}
+.buttons-row {
+  margin: 5px;
+  display: flex;
+  flex-direction: row;
+  position: absolute;
+  right: 0px;
+  align-items: right !important;
+}
+#dropdown-basic-button {
+  background-color: #0a66c2;
+  border-radius: 20px;
+  padding: 3px 20px;
+  margin: 5px;
+}
+#moreBtn {
+  background-color: white;
+  border: 1px solid #757575;
+  color: #757575;
+  border-radius: 20px;
+  padding: 3px 20px;
+  margin: 5px;
+}
+.biPencil {
+  font-size: 1.7rem;
+  color: #757575;
+  position: relative;
+  top: 3px;
+  margin: 5px;
+}
+.nameSurnameUni {
+  position: relative;
+  top: -80px;
+  left: 0px;
+  margin: 0px;
+  text-align: left;
+  padding-left: 20px;
+}
+.fluid.boxes {
+  width: 100%;
+  font-size: 0.8rem;
+  position: relative;
+  top: -70px;
+}
+.profile-info-box {
+  border: 2px dashed #cacacada;
+  padding: 2px;
+  border-radius: 5px;
+  padding: 5px;
+  padding-bottom: 0px;
+}
+.profile-profile-section h2 {
+  color: #0a66c2;
+}
+.profile-profile-section tbody {
+  background-color: white;
+  border-radius: 5px;
+}
+.profile-profile-section tbody p {
+  font-size: 1rem;
+}
+.profile-profile-section td:hover {
+  text-decoration: underline #0a66c2;
+  cursor: pointer;
+}
+.dashboardHolder {
+  width: 95%;
+  border-radius: 10px;
+  margin: 0 auto;
+  background-color: white;
+  margin: 3px;
+}
+hr {
+  border: 0;
+  clear: both;
+  display: block;
+  width: 96%;
+  background-color: #757575;
+  height: 1px;
+}

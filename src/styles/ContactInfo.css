@@ -1,0 +1,35 @@
+svg {
+  font-size: 25px;
+}
+
+svg:first-child {
+  text-align: center;
+}
+
+.info {
+  margin-left: 35px;
+}
+
+.pencil {
+  width: 40px;
+  height: 40px;
+}
+
+.pencil:hover {
+  border-radius: 50%;
+  background-color: rgb(157, 198, 231);
+}
+
+.inner-body a {
+  font-weight: 600;
+  font-size: 16px;
+  text-transform: lowercase;
+}
+
+.inner-body {
+  margin-top: 20px;
+}
+
+.inner-body b {
+  margin-left: 10px;
+}

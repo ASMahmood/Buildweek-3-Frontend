@@ -1,0 +1,86 @@
+#sideNav {
+  position: fixed;
+  top: 52px;
+  bottom: 0;
+  right: 0;
+  width: 380px;
+  background-color: white;
+  z-index: 6;
+  padding: 50px 20px 14px;
+  justify-content: start;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+}
+.backgroundFade {
+  position: fixed;
+  top: 52px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 5;
+}
+#sideNav > .card {
+  width: 350px;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+#sideNav .card-header {
+  background-color: transparent;
+  color: black;
+  font-weight: 600;
+  padding: 16px 16px 16px 30px;
+}
+#sideNav .card-footer {
+  background-color: transparent;
+  color: black;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 12px 30px;
+  display: flex;
+  align-items: center;
+}
+#sideNav .card-footer:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+#sideNav .row > .card {
+  border: none;
+}
+#sideNav .row > .card > .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  padding: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}
+#sideNav .row > .card > .card-body > svg {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+  border-radius: 5px;
+}
+#sideNav .row > .card > .card-body > svg:hover {
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.5);
+}
+
+#sideNav > .card:last-of-type .row {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 4px 4px 25px;
+}
+#sideNav > .card:last-of-type .row:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+#sideNav > .card:last-of-type .card-body {
+  padding: 5px 20px;
+}
+#sideNav > .card:last-of-type h6 {
+  margin: 0;
+  font-size: 14px;
+  color: black;
+}
+#sideNav > .card:last-of-type span {
+  margin: 0;
+  font-size: 12px;
+}

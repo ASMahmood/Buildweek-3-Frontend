@@ -1,0 +1,149 @@
+.feedPost {
+  min-width: 430px;
+  background-color: white;
+  margin: 5px 0px;
+  padding: 10px;
+  border: 1px solid #deddda;
+  border-radius: 10px;
+  position: relative;
+}
+
+.feedPost hr {
+  background-color: #deddda;
+}
+
+.feedPost .postTopRow {
+  display: flex;
+}
+
+.feedPost .postTopRow img {
+  margin: 0px 10px;
+  margin-left: 25px;
+  border-radius: 100%;
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+}
+
+.feedPost .postTopRow .nameBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.feedPost .postTopRow .nameBox > span {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+}
+.feedPost .postTopRow .nameBox h6 {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 0;
+}
+.feedPost .postTopRow .nameBox h6:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+.feedPost .postTopRow .nameBox h6 span {
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: normal;
+}
+
+.feedPost .postMiddleRow {
+  font-size: 14px;
+  margin: 15px 0px;
+}
+
+.feedPost .postBottomRow {
+  display: flex;
+  align-items: center;
+}
+.feedPost .postBottomRow .postBottomIcons {
+  margin-left: 20px;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  padding: 10px 5px;
+  border-radius: 10px;
+}
+.feedPost .postBottomRow .postBottomIcons:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.feedPost .postBottomRow .postBottomIcons svg {
+  margin-right: 3px;
+}
+
+.feedPost .memeMachine {
+  margin: 5px 25px;
+}
+
+.feedPost .kreyGasm {
+  background-image: url("../pay-no-attention-to-this.jpg");
+  background-position: center;
+  background-size: cover;
+  margin: 0;
+  border-radius: 15px;
+}
+
+.feedPost .memeMachine + hr {
+  margin-top: 0px;
+}
+
+.feedPost .sexyBeast {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+  font-weight: 600;
+  margin-right: 5px;
+}
+
+.feedPost .likesThis {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.feedPost .howMany {
+  font-size: 12px;
+  margin-left: 10px;
+}
+
+.feedPost .howMany:hover {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.feedPost hr {
+  margin-top: 5px;
+}
+
+.feedPost .commentArea {
+  position: relative;
+  background-color: rgba(0, 0, 0, 0.068);
+  width: 100%;
+  border-radius: 5px;
+  padding: 3px 7px;
+}
+
+.feedPost .author {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.feedPost .time {
+  position: absolute;
+  right: 15px;
+  top: 5px;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.feedPost .commentArea p {
+  word-break: break-all;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.8);
+}

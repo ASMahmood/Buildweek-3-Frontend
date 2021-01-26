@@ -1,0 +1,119 @@
+body {
+  color: #4b4b4b;
+}
+#wrapper {
+  width: 115%;
+  margin-right: -2.8rem;
+}
+#wrapper hr {
+  background-color: #deddda;
+}
+#feedMiddleColumn {
+  margin-left: 2rem;
+}
+.profile-wrapper {
+  border: 1px solid #deddda;
+  border-radius: 8px;
+  height: auto;
+  width: 100%;
+  margin-top: 3.2rem;
+  background-color: white;
+}
+.cover-img {
+  height: 50px;
+  width: 100%;
+  object-fit: cover;
+  border-radius: 8px 8px 0px 0px;
+}
+.profile-img {
+  z-index: 5;
+  position: relative;
+  top: -25px;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  text-align: center;
+  border-radius: 50%;
+  height: 70px;
+  width: 70px;
+  border: 3px solid white;
+  object-fit: cover;
+}
+.profile-wrapper .profile-info {
+  position: relative;
+  top: 0px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+.profile-info p {
+  font-size: 0.7rem;
+  line-height: 12px;
+}
+hr {
+  color: #deddda;
+  width: 100%;
+  position: relative;
+  top: -5px;
+}
+.growNetwork {
+  font-size: 0.8rem;
+  line-height: 15px;
+  position: relative;
+  left: 15px;
+  width: 100%;
+  padding: 3px;
+  margin-top: -22px;
+  margin-bottom: -11px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+}
+.prof-section:hover,
+.profile-saved-items:hover {
+  background-color: #b1b1b148;
+  cursor: pointer;
+}
+.profile-saved-items {
+  padding: 10px 0px 5px 10px;
+  margin-top: -22px;
+}
+.groups-wrapper {
+  border: 1px solid #deddda;
+  border-radius: 8px;
+  height: auto;
+  width: 100%;
+  background-color: white;
+  color: #0a66c2;
+  padding: 10px 3px;
+  margin-top: 1rem;
+  position: sticky !important;
+  top: 0;
+}
+.groups-wrapper h6 {
+  font-size: 0.8rem !important;
+}
+.groups-wrapper h6:hover {
+  color: #094f96;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.aiOutlinePlus {
+  padding: 5px;
+  margin-right: 5px;
+}
+.aiOutlinePlus:hover {
+  border-radius: 50%;
+  background-color: #b1b1b148;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  #wrapper {
+    width: 100%;
+    margin-right: 0;
+  }
+  #feedMiddleColumn {
+    margin-left: 0;
+  }
+}

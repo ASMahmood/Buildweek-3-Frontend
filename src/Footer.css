@@ -1,0 +1,22 @@
+footer a {
+  font-size: 0.84rem;
+  color: #56687a;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+footer small {
+  font-size: small;
+}
+
+footer select {
+  width: 20vw;
+  padding: 5px 0;
+  border-radius: 3px;
+  font-size: 15px;
+}
+
+div.col {
+  margin: 0;
+  padding: 0 3px;
+}

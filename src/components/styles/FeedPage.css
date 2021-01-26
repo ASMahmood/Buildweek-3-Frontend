@@ -1,0 +1,17 @@
+#soloHalo2 > .row > .col > hr {
+  background-color: #deddda;
+  margin: 1rem 0px;
+  width: 100%;
+}
+
+#feedRightColumn {
+  margin-right: 20px;
+}
+
+@media (max-width: 768px) {
+  #posterBit {
+    position: sticky;
+    top: 10px;
+    z-index: 10;
+  }
+}

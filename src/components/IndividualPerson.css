@@ -1,0 +1,55 @@
+#person img {
+  border-radius: 5000px;
+  height: 60px;
+  width: 60px;
+  object-fit: cover;
+}
+
+#person h6 {
+  margin: 0;
+  font-size: 16px;
+}
+
+#person span {
+  font-size: 14px;
+  line-height: 20px;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+}
+
+#person h6:hover,
+#person span:hover {
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#person {
+  padding: 0;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  margin: 10px;
+  position: relative;
+}
+#person .addFriendCircle {
+  border: 1px solid #5f5f5f;
+  border-radius: 50000px;
+  color: #5f5f5f;
+  width: 30px;
+  height: 25px;
+}
+#person .addFriendCircle:hover {
+  border: 1px solid #3a3a3a;
+  color: #3a3a3a;
+  background-color: #7a7a7a46;
+  cursor: pointer;
+}
+
+#divider {
+  position: absolute;
+  border: 1px solid #deddda;
+  bottom: -10px;
+  right: -25px;
+}

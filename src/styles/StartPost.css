@@ -1,0 +1,36 @@
+.feed-btn {
+  border-radius: 30px;
+  margin-left: 15px;
+  width: 20%;
+  height: 2rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.feed-btn-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  position: relative;
+}
+
+.imagePreview {
+  display: flex;
+  justify-content: center;
+}
+
+.imagePreview img {
+  max-width: 450px;
+  margin-bottom: 20px;
+}
+
+.feed-btn-wrapper .visually-hidden {
+  position: absolute;
+  right: 165px;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}

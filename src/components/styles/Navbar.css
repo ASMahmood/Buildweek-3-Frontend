@@ -1,0 +1,247 @@
+.header {
+  display: flex;
+  align-items: center;
+}
+.main-container {
+  box-shadow: 0px 5px 8px -9px grey;
+  background-color: white;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+}
+
+.icon {
+  width: 1.6rem;
+  height: 1.6rem;
+  cursor: pointer;
+  color: rgb(110, 110, 110);
+}
+
+.icon:hover {
+  color: rgb(63, 63, 63);
+}
+
+.navbar-right {
+  display: flex;
+  position: relative;
+  left: 16%;
+  flex: 0.4;
+}
+
+.navbar-right > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.navbar-right > div:last-of-type {
+  flex-direction: initial;
+  justify-content: center;
+}
+
+.navbar-right > div > h5 {
+  margin-bottom: 0px;
+}
+
+.navbar-left {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  flex: 0.3;
+}
+
+.Linkedin-icon * {
+  width: 40px;
+  height: 40px;
+  color: #0073b1;
+}
+
+.navbar-profile-menu > img {
+  width: 1.4rem;
+  margin: 3px 0;
+  height: 1.4rem;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+.navbar-profile-menu > img:hover {
+  transform: scale(1.5);
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  width: 18rem;
+  /* background-color: #84bddb31; */
+  background-color: transparent;
+  padding: 10px;
+  margin-left: 0.1rem;
+  border-radius: 4px;
+  height: 2.1rem;
+}
+
+.search-input > input {
+  border: none;
+  background-color: transparent;
+  outline-width: 0;
+}
+
+.side-menu {
+  border-left: 1px solid grey;
+  display: flex;
+  flex: 0.3;
+}
+
+@media screen and (max-width: 1200px) {
+  .navbar-right > div > h5 {
+    display: none;
+  }
+
+  .side-menu > div > h5 {
+    display: none;
+  }
+}
+
+#dropdown-menu-align-right {
+  padding: 0;
+  background: none;
+  color: rgb(53, 53, 53);
+  border: none;
+  font-size: 12px;
+  letter-spacing: 1;
+  font-weight: 400;
+}
+
+#meMenu img {
+  border-radius: 100%;
+}
+
+#meMenu h6 {
+  margin-bottom: 0;
+  color: black;
+}
+#meMenu h6:hover {
+  text-decoration: none;
+}
+
+#meMenu #profileButton {
+  background-color: white;
+  border: 1px solid #0a66c2;
+  border-radius: 500px;
+  width: 100%;
+  padding: 0;
+  color: #0a66c2;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+}
+#meMenu #profileButton:hover {
+  background-color: #0983fd38;
+}
+#meMenu .dropdown-item {
+  font-size: 14px;
+  color: #6c757d;
+  padding: 5px 12px 2px;
+}
+#meMenu .dropdown-item:hover {
+  background-color: white;
+  text-decoration: underline;
+}
+#meMenu .dropdown-item:first-of-type:hover {
+  text-decoration: none;
+}
+#meMenu .dropdown-header {
+  font-size: 16px;
+  font-weight: 600;
+  padding: 8px 12px 0px;
+  color: black;
+}
+.downshift-dropdown {
+  position: absolute;
+  top: 2.9rem;
+  margin-left: -3rem;
+  width: 24rem;
+}
+.dropdown-item {
+  position: relative;
+  top: 0px;
+}
+.search-btn {
+  min-width: 200px !important;
+  position: absolute;
+  top: 0.6rem;
+  width: 18rem;
+  background-color: #84bddb31;
+  /* background-color: transparent; */
+  padding: 5px 10px;
+  border: 1px solid #deddda;
+  border-radius: 4px;
+}
+.search-btn:active {
+  border: 1px solid #6c757d !important;
+  outline: none !important;
+}
+.search-btn:active {
+  border: 1px solid #6c757d !important;
+  outline: none !important;
+}
+.active-link{
+  color: #1b1b1b !important;
+  text-decoration: none;
+  position: relative;
+}
+.active-link::after{
+  content: "";
+  position: absolute;
+  top: 97%;
+  height: 2px;
+  width: 90%;
+  left: 5%;
+  background-color: #1b1b1b;
+  z-index: 10;
+}
+.active-link:hover{
+  text-decoration: none;
+}
+.menu-link-text{
+  color: #4b4b4b;
+}
+.navbar-right a{
+  color: #4b4b4b;
+  text-decoration: none;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+  .active-link h5{
+    display: none;
+  }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+  .active-link h5{
+    display: none;
+  }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+  .active-link h5{
+    display: none;
+  }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+  .active-link h5{
+    display: none;
+  }
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+  .active-link h5{
+    display: inline-block;
+  }
+}

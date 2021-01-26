@@ -1,0 +1,48 @@
+.create-feed {
+  width: 110%;
+  padding: 20px;
+
+  margin-top: 5%;
+  display: flex;
+  justify-content: center;
+  margin-left: -10px;
+}
+
+.feed-wrapper {
+  width: 100%;
+  background-color: white;
+  padding: 15px;
+  border-radius: 10px;
+  border: 0.05rem solid #deddda;
+}
+
+.feed-icons-wrapper {
+  display: flex;
+  justify-content: space-around;
+}
+
+.pic-icon {
+  color: rgb(0, 153, 255);
+}
+
+.vid-icon {
+  color: orange;
+}
+
+.event-icon {
+  color: gray;
+}
+
+.article-icon {
+  color: green;
+}
+
+.feed-icons-wrapper {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.text-dark {
+  opacity: 0.5;
+  letter-spacing: 0.03rem;
+}

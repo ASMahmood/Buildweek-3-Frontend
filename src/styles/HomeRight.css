@@ -1,0 +1,72 @@
+.recomandations {
+  border: 1px solid #deddda;
+  border-radius: 8px;
+  height: auto;
+  width: 100%;
+  margin-top: 3.2rem;
+  background-color: white;
+  padding: 5px 20px;
+}
+.title {
+  font-size: 0.9rem;
+}
+.recomandations img {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  margin-left: -10px;
+  margin-right: 5px;
+  margin-top: -5px;
+}
+.recomandations h6 {
+  font-size: 0.8rem;
+}
+.recomandations button {
+  border-radius: 20px;
+  border: 1px solid #0a66c2;
+  color: #0a66c2;
+  background-color: white;
+  padding: 0px 6px 5px 6px;
+}
+.singleRecomandation {
+  margin-bottom: 0.8rem;
+}
+.singleRecomandation:hover {
+  cursor: pointer;
+}
+.bottomh6 {
+  font-size: 0.8rem;
+  color: #0a66c2;
+}
+.bottomh6:hover {
+  color: #094f96;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.singleRecomandation.second:hover {
+  text-decoration: underline;
+}
+.follow-btn {
+  display: inline;
+}
+@media only screen and (max-width: 600px) {
+  .follow-btn {
+    display: none;
+  }
+  .singleRecomandation Col Row button {
+    position: absolute;
+    top: 30%;
+    margin-top: 40%;
+    background-color: red;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .follow-btn {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .follow-btn {
+    display: inline;
+  }
+}

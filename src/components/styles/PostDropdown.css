@@ -1,0 +1,53 @@
+.postEllipses {
+  position: absolute;
+  right: 20px;
+  border-radius: 100%;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+}
+.postEllipses:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+.postDrop {
+  position: absolute;
+  top: 30px;
+  right: 20px;
+  background-color: white;
+
+  z-index: 4;
+  border-radius: 10px;
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.15);
+  width: 340px;
+}
+
+.postDrop .dreamsDropDistance {
+  display: flex;
+  align-items: center;
+}
+
+.postDrop .dreamsDropDistance:hover {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.postDrop .dreamsDropDistance .megatron {
+  display: flex;
+  flex-direction: column;
+  margin: 5px 0px;
+}
+
+.postDrop .dreamsDropDistance .iconMaster {
+  margin: 0px 10px;
+}
+
+.postDrop .dreamsDropDistance .megatron .is {
+  font-size: 14px;
+  font-weight: 600;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.postDrop .dreamsDropDistance .megatron .dumb {
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.6);
+}
