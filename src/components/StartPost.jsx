@@ -14,7 +14,13 @@ const { Modal, Button, Form } = require("react-bootstrap");
 class StartPost extends Component {
   state = {
     show: false,
-    post: { text: "" ,username:"ASMahmood", user_id:"600e9bba26717934c83387fd",comments:[],image:""},
+    post: { 
+      text: "" ,
+      username: "ASMahmood",
+      user_id: "600e9bba26717934c83387fd",
+      comments: [],
+      image: ""
+    },
     image: null,
     errMessage: "",
   };
@@ -38,17 +44,15 @@ class StartPost extends Component {
     console.log(this.state.image);
     try {
       const response = await fetch(
-        "http://localhost:3002/post",
+        process.env.REACT_APP_SERVER + "/post",
         {
           method: "POST",
-          body: JSON.stringify({text:this.state.post.text,username:"ASMahmood",user_id:"600e9bba26717934c83387fd",comments:[],image:"default"}),
+          body: JSON.stringify({text:this.state.post.text,username:"ASMahmood",user_id:localStorage.getItem('profileID'),comments:[],image:"default"}),
           headers: new Headers({
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
           }),
         }
       );
-console.log({text:this.state.post.text,username:"ASMahmood",user_id:"600e9bba26717934c83387fd",comments:[],image:"default"})
       if (response.ok && this.state.image) {
         let hope = await response.json();
         console.log(hope)
@@ -89,7 +93,6 @@ console.log({text:this.state.post.text,username:"ASMahmood",user_id:"600e9bba267
             method: "POST",
             body: post,
             headers: new Headers({
-              Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
               Accept: "application/json",
             }),
           }

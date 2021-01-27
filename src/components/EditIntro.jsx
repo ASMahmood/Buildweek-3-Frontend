@@ -24,14 +24,13 @@ class EditIntro extends Component {
     this.updateProfilePic();
 
     const url =
-      process.env.REACT_APP_SERVER + "/profile/" + process.env.REACT_APP_ME;
+      process.env.REACT_APP_SERVER + "/profile/" + localStorage.getItem('profileID');
     try {
       const response = await fetch(url, {
         method: "PUT",
         body: JSON.stringify(this.state.user),
         headers: {
           "Content-Type": "application/json",
-          Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
         },
       });
 
@@ -56,7 +55,7 @@ class EditIntro extends Component {
     try {
       const response = await fetch(
         process.env.REACT_APP_SERVER +
-          `/profile/${process.env.REACT_APP_ME}/picture`,
+          `/profile/${localStorage.getItem('profilePic')}/picture`,
         {
           method: "POST",
           headers: new Headers({
