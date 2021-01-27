@@ -10,6 +10,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Experience from "./components/Experience";
 import OtherProfile from "./components/OtherProfile";
 import FeedPage from "./components/FeedPage";
+import SignIn from "./components/SignIn";
 
 class App extends React.Component {
   render() {
@@ -20,6 +21,7 @@ class App extends React.Component {
         <Route path="/profile/:id" component={OtherProfile} />
         <Route path="/feed" exact render={(props) => <FeedPage {...props} />} />
         <Route path="/experience" exact component={Experience} />
+        <Route path="/login" exact component={SignIn} />
         <Footer />
       </BrowserRouter>
     );

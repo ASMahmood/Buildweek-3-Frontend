@@ -1,0 +1,53 @@
+#signInPage {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #ffffff;
+  z-index: 100;
+}
+
+#signInPage .Linkedin-icon {
+  color: #0a66c2;
+}
+
+.logoTitle {
+  font-size: 33px;
+  font-weight: 700;
+  margin-right: 60px;
+}
+
+.registerNav {
+  background-color: transparent;
+  color: rgba(0, 0, 0, 0.6);
+  border: transparent solid 1px;
+  font-weight: 500;
+  font-size: 16px;
+}
+.registerNav:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 1);
+  border: white solid 1px;
+}
+.signInNav {
+  background-color: transparent;
+  color: #0a66c2;
+  border: #0a66c2 solid 1px;
+  border-radius: 100px;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 5px 22px;
+}
+.signInNav:hover {
+  background-color: rgba(10, 102, 194, 0.2);
+  color: #0a66c2;
+  border: #0a66c2 solid 1px;
+}
+.signInNav:focus,
+.signInNav:active {
+  background-color: rgba(10, 102, 194, 0.4) !important;
+  color: #0a66c2 !important;
+  box-shadow: none !important;
+  border: #0a66c2 solid 1px;
+}
