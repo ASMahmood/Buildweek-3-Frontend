@@ -4,28 +4,6 @@ import IndividualPerson from "./IndividualPerson";
 import "./PeopleRelated.css";
 
 class PeopleRelated extends React.Component {
-  state = {
-    other: [],
-  };
-  componentDidMount = () => {
-    this.fetchProfiles();
-  };
-  fetchProfiles = async () => {
-    try {
-      let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/",
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
-          },
-        }
-      );
-      let parsedResponse = await response.json();
-      this.setState({ other: parsedResponse });
-    } catch (error) {
-      console.log(error);
-    }
-  };
   render() {
     return (
       <Container id="relatedGroup" className="my-3">
@@ -41,22 +19,20 @@ class PeopleRelated extends React.Component {
             {this.props.title}
           </h5>
         </Row>
-        {this.state.other &&
-          this.state.other
-            .slice(this.props.arrPosition, this.props.arrPosition + 5)
-            .map((person, index) => (
-              <>
-                <IndividualPerson
-                  name={person.name}
-                  job={person.title}
-                  pic={person.image}
-                  key={index}
-                  userid={person._id}
-                  divider={index === 4 ? false : true}
-                />
-              </>
-            ))}
-        {this.state.other.length === 0 && (
+        {this.props.others.length > 0 &&
+          this.props.others.map((person, index) => (
+            <>
+              <IndividualPerson
+                name={person.name}
+                job={person.title}
+                pic={person.image}
+                key={index}
+                userid={person._id}
+                divider={index === 4 ? false : true}
+              />
+            </>
+          ))}
+        {this.props.others.length === 0 && (
           <>
             <IndividualPerson
               name="Manuel Desole"
