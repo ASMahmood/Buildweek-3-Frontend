@@ -52,7 +52,6 @@ class HomeProfile extends React.Component {
           <hr />
           <div
             class="profile-saved-items"
-            onClick={() => this.props.toggleSaved()}
           >
             <Row>
               <Col xs={1}>

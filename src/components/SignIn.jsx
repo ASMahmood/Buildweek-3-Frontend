@@ -51,17 +51,17 @@ class SignIn extends React.Component {
               <AiFillLinkedin />
             </Nav.Link>
             <Button className="registerNav">Join now</Button>
-            <Button className="signInNav">Sign in</Button>
+            <Button className="signInNav" onClick={this.fetchProfileId}>Sign in</Button>
           </Navbar>
-          <Row>
+          <Row className="mt-5">
             <Col xs={6}>
               <h1 className="welcomePage">
-                Welcome to your professional community {localStorage.getItem('profileID')}
+                Welcome to your professional community 
               </h1>
             </Col>
           </Row>
-          <Row>
-            <Col xs={4}>
+          <Row className="position-relative">
+            <Col xs={6} className="formCol">
               <Form className="signInForm" onSubmit={this.fetchProfileId}>
                 <Form.Group controlId="formBasicEmail">
                   <Form.Control type="email" placeholder="Email" value={this.state.email} onChange={(e) => this.setState({ email: e.currentTarget.value})}/>
@@ -69,7 +69,7 @@ class SignIn extends React.Component {
                 <Form.Group controlId="formBasicPassword">
                   <Form.Control type="password" placeholder="Password" value={this.state.password} onChange={(e) => this.setState({ password: e.currentTarget.value})}/>
                 </Form.Group>
-                <span className="forgotPassord">Forgot password?</span>
+                <span className="forgotPassword mb-3">Forgot password?</span>
                 <Button
                   variant="primary"
                   className="submitSignIn"
@@ -78,7 +78,12 @@ class SignIn extends React.Component {
                   Sign in
                 </Button>
               </Form>
+              <div className="bg-colour-change"></div>
             </Col>
+
+            <div className="signInImage ml-auto">
+              <img src="https://res.cloudinary.com/dhmw620tl/image/upload/v1611324427/m6d10/rhuirjdcbvfnaiwqmw6i.png" style={{objectFit: "cover", width: "600px"}} alt="image" />
+            </div>
           </Row>
         </Container>
       </div>

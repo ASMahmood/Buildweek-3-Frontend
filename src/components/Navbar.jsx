@@ -17,7 +17,7 @@ import { withRouter, NavLink, Link } from "react-router-dom";
 
 class Navbar extends React.Component {
   state = {
-    user: "",
+    user: {},
   };
 
   componentDidMount = () => {
@@ -176,7 +176,7 @@ class Navbar extends React.Component {
                   <Dropdown.Item eventKey="4">
                     <Button
                       id="profileButton"
-                      onClick={() => this.props.history.push("/")}
+                      onClick={() => this.props.history.push("/me")}
                     >
                       View Profile
                     </Button>
