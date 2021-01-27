@@ -113,7 +113,7 @@ await this.fetchPosts()
               }}
             />
             <Row className="d-flex justify-content-center">
-            {this.state.postArray.map(post => 
+            {this.state.postArray.reverse().map(post => 
                (<Container className = "postContainer" >
                  <Row className = "userPostRow" >
                    <Col sm ={2}><img src = {post.user_id.image} className = "profilePicPost"/> </Col>
