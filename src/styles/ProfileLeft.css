@@ -28,14 +28,17 @@ body {
   left: 40px;
   height: 140px;
   width: 140px;
+  z-index: 3;
 }
 .profilePic img {
   border-radius: 50%;
+  border: 5px solid transparent;
   height: 140px;
   width: 140px;
   position: relative;
   left: -5px;
   top: -4px;
+  z-index: 2;
   object-fit: cover;
 }
 .profile-info {
