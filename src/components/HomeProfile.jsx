@@ -17,7 +17,7 @@ class HomeProfile extends React.Component {
   fetchUser = async () => {
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/me",
+        "http://localhost:3002/profile/600e9bba26717934c83387fd",
         {
           headers: {
             Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,

@@ -14,7 +14,7 @@ const { Modal, Button, Form } = require("react-bootstrap");
 class StartPost extends Component {
   state = {
     show: false,
-    post: { text: "" },
+    post: { text: "" ,username:"ASMahmood", user_id:"600e9bba26717934c83387fd",comments:[],image:""},
     image: null,
     errMessage: "",
   };
@@ -38,19 +38,21 @@ class StartPost extends Component {
     console.log(this.state.image);
     try {
       const response = await fetch(
-        "https://buildweek-3.herokuapp.com/post",
+        "http://localhost:3002/post",
         {
           method: "POST",
-          body: JSON.stringify(this.state.post),
+          body: JSON.stringify({text:this.state.post.text,username:"ASMahmood",user_id:"600e9bba26717934c83387fd",comments:[],image:"default"}),
           headers: new Headers({
             "Content-Type": "application/json",
+            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
           }),
         }
       );
-
+console.log({text:this.state.post.text,username:"ASMahmood",user_id:"600e9bba26717934c83387fd",comments:[],image:"default"})
       if (response.ok && this.state.image) {
         let hope = await response.json();
-        await this.postImage(hope._id);
+        console.log(hope)
+        await this.postImage(hope);
       } else if (response.ok) {
         alert("Post sent !");
         this.setState({
@@ -79,10 +81,10 @@ class StartPost extends Component {
   postImage = async (postId) => {
     try {
       let post = new FormData();
-      await post.append("post", this.state.image);
+      await post.append("postPic", this.state.image);
       if (post) {
         let response = await fetch(
-          "https://striveschool-api.herokuapp.com/api/posts/" + postId,
+          "hhttp://localhost:3002/post/" + postId + "/picture",
           {
             method: "POST",
             body: post,
@@ -92,6 +94,8 @@ class StartPost extends Component {
             }),
           }
         );
+        console.log("post a pic")
+        this.handleClose();
         if (response.ok) {
           alert("Post sent with image !");
           this.setState({
@@ -100,7 +104,7 @@ class StartPost extends Component {
             errMessage: "",
           });
           this.props.fetchPosts();
-          this.handleClose();
+          
         }
       }
     } catch (error) {
