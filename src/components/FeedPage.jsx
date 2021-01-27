@@ -1,36 +1,80 @@
 import React from "react";
-import { Container, Row, Col, Spinner } from "react-bootstrap";
+import { Container, Row, Col, Spinner,Image,Button,Modal,Form } from "react-bootstrap";
 import CreateFeed from "./CreateFeed";
 import HomeProfile from "./HomeProfile";
 import HomeRight from "./HomeRight";
-import PostsColumn from "./PostsColumn";
-import SavedPosts from "./SavedPosts";
-import "./styles/FeedPage.css";
+import {RiPencilFill } from "react-icons/ri";
+import {AiOutlineDelete } from "react-icons/ai";
 
+import "./styles/FeedPage.css";
 class FeedPage extends React.Component {
   state = {
     postArray: [],
-    whyisitlikethisArray: [],
-    filteredArray: [],
-    loading: true,
-    profiles: [],
-    blacklist: [],
-    blacklistProfiles: [],
-    savedArray: [],
-    savedPosts: [],
-    displaySaved: false,
+    show:false,
+    postIdForEdit:"",
+    currentPostForEdit:{},
+    editedText:""
   };
 
+  deletePost = async (id) => {
+    await fetch(
+      `https://buildweek-3.herokuapp.com/post/${id}`,
+      {
+        method: 'DELETE'
+      }
+    );
+    this.fetchPosts()
+  }
+  openEditPostModal = async (id) => {
+   console.log(id);
+   
+   try {
+    let response = await fetch(
+      `https://buildweek-3.herokuapp.com/post/${id}`,
+      {
+        headers: {
+          Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
+        },
+      }
+    );
+    let parsedResponse = await response.json();
+    this.setState({ currentPostForEdit: parsedResponse}, () => {
+      console.log(this.state.currentPostForEdit);
+    });
+    this.setState({show:true})
+  } catch (error) {
+    console.log("problem with getting psots ->", error);
+  }
+  }
+  updatePost = async () => {
+   let editedPost = this.state.currentPostForEdit
+   editedPost.text = this.state.editedText
+   this.setState({currentPostForEdit:editedPost})
+   let requestBody = {text:this.state.editedText,username:this.state.currentPostForEdit.username,user_id:this.state.currentPostForEdit.user_id._id,image:this.state.currentPostForEdit.image}
+   
+   //fetching`
+let response = await fetch(
+  `https://buildweek-3.herokuapp.com/post/${this.state.currentPostForEdit._id}`,
+  {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(requestBody)
+  }
+);
+await this.fetchPosts()
+  }
   componentDidMount = () => {
     this.fetchPosts();
-    this.fetchProfiles();
+   // this.fetchProfiles();
   };
 
   fetchPosts = async () => {
     this.setState({ loading: true });
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/posts/",
+        "https://buildweek-3.herokuapp.com/post",
         {
           headers: {
             Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
@@ -39,111 +83,19 @@ class FeedPage extends React.Component {
       );
       let parsedResponse = await response.json();
       console.log(parsedResponse);
-      this.setState({ postArray: parsedResponse.reverse() });
-      this.setState({ whyisitlikethisArray: parsedResponse });
-      if (this.state.blacklistProfiles.length > 0) {
-        let postArray = [...this.state.postArray];
-        await this.state.postArray.map((post) => {
-          if (this.state.blacklistProfiles.includes(post.user._id)) {
-            postArray.splice(postArray.indexOf(post), 1);
-          }
-        });
-        console.log(postArray, "after map in enforce blacklist PROFILES");
-        await this.setState({ postArray: postArray });
-      }
-      if (this.state.blacklist.length > 0) {
-        let postArray = [...this.state.postArray];
-        await this.state.postArray.map((post) => {
-          if (this.state.blacklist.includes(post._id)) {
-            postArray.splice(postArray.indexOf(post), 1);
-          }
-        });
-        console.log(postArray, "after map in enforce blacklist POSTS");
-        await this.setState({ postArray: postArray });
-      }
-      this.setState({ loading: false });
-      console.log(this.state.postArray);
+      this.setState({ postArray: parsedResponse}, () => {
+        console.log(this.state.postArray);
+      });
     } catch (error) {
       console.log("uh oh stinky when fetching all the posts", error);
     }
   };
 
-  fetchProfiles = async () => {
-    try {
-      let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/",
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
-          },
-        }
-      );
-      let parsedResponse = await response.json();
-      this.setState({ profiles: parsedResponse });
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  addToBlacklist = async (id, identifier) => {
-    if (identifier === "post") {
-      let newblacklist = [...this.state.blacklist];
-      newblacklist.push(id);
-      await this.setState({ blacklist: newblacklist });
-      this.enforeBlacklist(newblacklist, identifier);
-    } else if (identifier === "profile") {
-      let newblacklist = [...this.state.blacklistProfiles];
-      newblacklist.push(id);
-      await this.setState({ blacklistProfiles: newblacklist });
-      this.enforeBlacklist(newblacklist, identifier);
-    }
-  };
-
-  enforeBlacklist = async (blacklist, identifier) => {
-    let postArray = [...this.state.postArray];
-    if (identifier === "post") {
-      await this.state.postArray.map((post) => {
-        if (blacklist.includes(post._id)) {
-          postArray.splice(postArray.indexOf(post), 1);
-        }
-      });
-    } else if (identifier === "profile") {
-      await this.state.postArray.map((post) => {
-        if (blacklist.includes(post.user._id)) {
-          postArray.splice(postArray.indexOf(post), 1);
-        }
-      });
-    }
-    await this.setState({ postArray: postArray });
-    this.fetchPosts();
-  };
-
-  addToSaved = async (id) => {
-    let saved = [...this.state.savedArray];
-    saved.push(id);
-    console.log(saved);
-    await this.setState({ savedArray: saved });
-    console.log(this.state.savedArray);
-    let savedPosts = [];
-    await this.state.whyisitlikethisArray.map((post) => {
-      if (this.state.savedArray.includes(post._id)) {
-        console.log("saved found!");
-      }
-    });
-    await this.setState({ savedPosts: savedPosts });
-    console.log(this.state.savedPosts);
-  };
-
-  toggleSaved = () => {
-    if (this.state.displaySaved === false) {
-      this.setState({ displaySaved: true });
-    } else {
-      this.setState({ displaySaved: false });
-    }
-  };
+ 
 
   render() {
     return (
+      <>
       <Container style={{ marginTop: "2rem" }}>
         <Row id="hopesAndDreams">
           <Col md={2}>
@@ -161,36 +113,26 @@ class FeedPage extends React.Component {
               }}
             />
             <Row className="d-flex justify-content-center">
-              {this.state.loading && (
-                <Spinner animation="border" variant="primary" />
-              )}
-              {this.state.postArray &&
-                !this.state.displaySaved &&
-                this.state.profiles &&
-                !this.state.loading && (
-                  <PostsColumn
-                    user={this.props.user}
-                    postArray={this.state.postArray}
-                    profiles={this.state.profiles}
-                    addToBlacklist={this.addToBlacklist}
-                    addToSaved={this.addToSaved}
-                    fetchPosts={this.fetchPosts}
-                  />
-                )}
-              {this.state.postArray &&
-                this.state.displaySaved &&
-                this.state.profiles &&
-                !this.state.loading && (
-                  <SavedPosts
-                    user={this.props.user}
-                    postArray={this.state.postArray}
-                    profiles={this.state.profiles}
-                    savedPosts={this.state.savedArray}
-                    addToBlacklist={this.addToBlacklist}
-                    addToSaved={this.addToSaved}
-                    fetchPosts={this.fetchPosts}
-                  />
-                )}
+            {this.state.postArray.map(post => 
+               (<Container className = "postContainer" >
+                 <Row className = "userPostRow" >
+                   <Col sm ={2}><img src = {post.user_id.image} className = "profilePicPost"/> </Col>
+                   <Col sm ={8}>
+                     <Row className = "postUsername"><p>{post.user_id.username}</p></Row>
+                     <Row className = "postCreatedAt"><p>{post.createdAt}</p></Row>
+                   </Col>
+                   <Col sm ={1}><RiPencilFill className = "pen" onClick = {()=> this.openEditPostModal(post._id)}/></Col>
+                   <Col sm ={1}><AiOutlineDelete className = "bin" onClick = {()=> this.deletePost(post._id)}/></Col>
+                   </Row>
+                   <Row>
+                     <Col sm={2}></Col>
+                     <Col sm={10} classNam = "postText"> <p>{post.text}</p></Col>
+                     <Col sm={2}></Col>
+               
+                     </Row>
+                 </Container> 
+               )
+            )}
             </Row>
           </Col>
           <Col md={3} id="feedRightColumn">
@@ -199,6 +141,35 @@ class FeedPage extends React.Component {
         </Row>
         <hr />
       </Container>
+
+      <Modal
+        show={this.state.show}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Post</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+        <Form>
+   <Form.Group controlId="exampleForm.ControlTextarea1">
+    <Form.Label>Example textarea</Form.Label>
+    <Form.Control as="textarea" rows={3} defaultValue = {this.state.currentPostForEdit.text} onChange={(e) => this.setState({editedText:e.currentTarget.value})}/>
+  </Form.Group>
+  </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary"  onClick = {()=> this.setState({show:false})}>
+            Close
+          </Button>
+          <Button variant="primary" onClick = {() => this.updatePost()}>Save</Button>
+        </Modal.Footer>
+      </Modal>
+
+</>
+
+//modal for edit post
+
     );
   }
 }
