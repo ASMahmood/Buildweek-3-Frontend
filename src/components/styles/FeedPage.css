@@ -37,13 +37,19 @@ font-size:11.5px
 .pen{
   color:gray;
   font-size:20px;
-  margin-left:20px
+  margin-left:20px;
 }
 .bin{
   color:gray;
   font-size:20px;
 }
+.bin:hover{
+  color:red
+}
+.pen:hover{
+color:blue
+}
 .imageForPost{
-  max-width:250px;
-  margin-bottom: 10px;
+  width:400px;
+  height: 500px ;
 }

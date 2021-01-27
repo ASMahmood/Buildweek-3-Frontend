@@ -5,6 +5,7 @@ import HomeProfile from "./HomeProfile";
 import HomeRight from "./HomeRight";
 import {RiPencilFill } from "react-icons/ri";
 import {AiOutlineDelete } from "react-icons/ai";
+import Moment from 'react-moment';
 
 import "./styles/FeedPage.css";
 class FeedPage extends React.Component {
@@ -119,18 +120,16 @@ await this.fetchPosts()
                    <Col sm ={2}><img src = {post.user_id.image} className = "profilePicPost"/> </Col>
                    <Col sm ={8}>
                      <Row className = "postUsername"><p>{post.user_id.username}</p></Row>
-                     <Row className = "postCreatedAt"><p>{post.createdAt}</p></Row>
+                     <Row className = "postCreatedAt"><p><Moment format ="YYYY/MM/DD">{post.createdAt}</Moment></p></Row>
                    </Col>
                    <Col sm ={1}><RiPencilFill className = "pen" onClick = {()=> this.openEditPostModal(post._id)}/></Col>
                    <Col sm ={1}><AiOutlineDelete className = "bin" onClick = {()=> this.deletePost(post._id)}/></Col>
                    </Row>
                    <Row>
-                     <Col sm={2}></Col>
-                     <Col sm={10} className = "postText"> <p>{post.text}</p></Col>
-                     <Col sm={2}></Col>
-               <Row className = "imagePostRow"><Col sm={2}></Col>
-                     <Col sm={10} className = "postText"> <img className = "imageForPost" src = {post.image} /></Col>
-                     <Col sm={2}></Col> </Row> 
+                     <Col  className = "d-flex justify-content-center"> <p>{post.text}</p></Col>
+                     </Row>
+               <Row className = "imagePostRow">
+                     <Col className = "d-flex justify-content-center"> <img className = "imageForPost" src = {post.image} /></Col>
                      </Row>
                  </Container> 
                )
