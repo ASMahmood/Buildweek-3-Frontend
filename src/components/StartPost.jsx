@@ -84,7 +84,7 @@ console.log({text:this.state.post.text,username:"ASMahmood",user_id:"600e9bba267
       await post.append("postPic", this.state.image);
       if (post) {
         let response = await fetch(
-          "hhttp://localhost:3002/post/" + postId + "/picture",
+          "http://localhost:3002/post/" + postId + "/picture",
           {
             method: "POST",
             body: post,

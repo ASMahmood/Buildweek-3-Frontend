@@ -43,3 +43,6 @@ font-size:11.5px
   color:gray;
   font-size:20px;
 }
+.imageForPost{
+  max-width:250px
+}

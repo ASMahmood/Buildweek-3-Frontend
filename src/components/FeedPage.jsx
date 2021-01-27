@@ -126,9 +126,11 @@ await this.fetchPosts()
                    </Row>
                    <Row>
                      <Col sm={2}></Col>
-                     <Col sm={10} classNam = "postText"> <p>{post.text}</p></Col>
+                     <Col sm={10} className = "postText"> <p>{post.text}</p></Col>
                      <Col sm={2}></Col>
-               
+               <Row className = "imagePostRow"><Col sm={2}></Col>
+                     <Col sm={10} className = "postText"> <img className = "imageForPost" src = {post.image} /></Col>
+                     <Col sm={2}></Col> </Row> 
                      </Row>
                  </Container> 
                )
