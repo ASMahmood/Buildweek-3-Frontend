@@ -25,7 +25,7 @@ class PostDropdown extends React.Component {
             <MoreHorizIcon />
           </div>
           <div className="postDrop">
-            {this.props.user._id === this.props.profile._id ? (
+            {this.props.user._id === localStorage.getItem("profileID") ? (
               <>
                 <EditPostImage
                   postID={this.props.postID}
@@ -34,10 +34,7 @@ class PostDropdown extends React.Component {
               </>
             ) : (
               <>
-                <div
-                  className="dreamsDropDistance"
-                  onClick={() => this.props.saved(this.props.postID)}
-                >
+                <div className="dreamsDropDistance">
                   <div className="iconMaster">
                     <BookmarkBorderIcon />
                   </div>
@@ -57,7 +54,7 @@ class PostDropdown extends React.Component {
                 <span className="is">Copy link to post</span>
               </div>
             </div>
-            {this.props.user._id === this.props.profile._id ? (
+            {this.props.user._id === localStorage.getItem("profileID") ? (
               <>
                 <EditPost
                   postID={this.props.postID}
@@ -66,12 +63,7 @@ class PostDropdown extends React.Component {
                 />
               </>
             ) : (
-              <div
-                className="dreamsDropDistance"
-                onClick={() =>
-                  this.props.blackList(this.props.user._id, "profile")
-                }
-              >
+              <div className="dreamsDropDistance">
                 <div className="iconMaster">
                   <CancelIcon />
                 </div>
@@ -87,10 +79,13 @@ class PostDropdown extends React.Component {
                 </div>
               </div>
             )}
-            {this.props.user._id === this.props.profile._id ? (
+            {this.props.user._id === localStorage.getItem("profileID") ? (
               <div
                 className="dreamsDropDistance"
-                onClick={() => this.props.deletePost()}
+                onClick={() => (
+                  this.props.deletePost(this.props.postID),
+                  this.setState({ show: false })
+                )}
               >
                 <div className="iconMaster">
                   <DeleteOutlineIcon />
@@ -104,10 +99,7 @@ class PostDropdown extends React.Component {
                 </div>
               </div>
             ) : (
-              <div
-                className="dreamsDropDistance"
-                onClick={() => this.props.blackList(this.props.postID, "post")}
-              >
+              <div className="dreamsDropDistance">
                 <div className="iconMaster">
                   <VisibilityOffIcon />
                 </div>
@@ -120,7 +112,7 @@ class PostDropdown extends React.Component {
               </div>
             )}
 
-            {this.props.user._id !== this.props.profile._id && (
+            {this.props.user._id !== localStorage.getItem("profileID") && (
               <div className="dreamsDropDistance">
                 <div className="iconMaster">
                   <BsFillFlagFill />

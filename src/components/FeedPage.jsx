@@ -17,6 +17,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import Moment from "react-moment";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
 import Likes from "./Likes";
+import PostDropdown from "./PostDropdown";
 import "./styles/FeedPage.css";
 class FeedPage extends React.Component {
   state = {
@@ -192,9 +193,12 @@ class FeedPage extends React.Component {
                         />
                       </Col>
                       <Col sm={1}>
-                        <AiOutlineDelete
-                          className="bin"
-                          onClick={() => this.deletePost(post._id)}
+                        <PostDropdown
+                          postID={post._id}
+                          postBody={post.text}
+                          user={post.user_id}
+                          fetchPosts={this.fetchPosts}
+                          deletePost={this.deletePost}
                         />
                       </Col>
                     </Row>
