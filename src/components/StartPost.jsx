@@ -88,7 +88,7 @@ class StartPost extends Component {
       await post.append("postPic", this.state.image);
       if (post) {
         let response = await fetch(
-          "http://localhost:3002/post/" + postId + "/picture",
+          process.env.REACT_APP_SERVER + "/post/" + postId + "/picture",
           {
             method: "POST",
             body: post,
