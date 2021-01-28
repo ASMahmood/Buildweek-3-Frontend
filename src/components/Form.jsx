@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button, Form, Alert } from "react-bootstrap";
+import { Modal, Button, Form } from "react-bootstrap";
 import { GrAdd } from "react-icons/gr";
 import { BiPencil } from "react-icons/bi";
 import "./styles/Form.css";
@@ -146,7 +146,7 @@ class FormModal extends React.Component {
         }
       );
       if (response.ok) {
-        const content = await response.json();
+        await response.json();
       }
     } catch (error) {
       console.log(error);

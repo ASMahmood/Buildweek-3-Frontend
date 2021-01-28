@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Container, Row, Col, Button, Modal, Form } from "react-bootstrap";
+import { Container, Row, Button, Form } from "react-bootstrap";
 
 export default class CommentsArea extends Component {
   state = {
@@ -26,6 +26,7 @@ export default class CommentsArea extends Component {
                 <img
                   src={comment.user_id[0].image}
                   className="commentProfilePic"
+                  alt="profile"
                 />
                 {comment.user_id[0].username} : {comment.text}{" "}
               </Row>

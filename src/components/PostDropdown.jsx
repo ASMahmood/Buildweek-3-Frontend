@@ -8,7 +8,6 @@ import DeleteOutlineIcon from "@material-ui/icons/DeleteOutline";
 import VisibilityIcon from "@material-ui/icons/Visibility";
 import { BsLink45Deg, BsFillFlagFill } from "react-icons/bs";
 import EditPostImage from "./EditPostImage";
-import EditPost from "./EditPost";
 import EditIcon from "@material-ui/icons/Edit";
 
 class PostDropdown extends React.Component {
@@ -59,10 +58,10 @@ class PostDropdown extends React.Component {
               <>
                 <div
                   className="dreamsDropDistance"
-                  onClick={() => (
-                    this.props.openEditModal(this.props.postID),
-                    this.setState({ show: false })
-                  )}
+                  onClick={() => {
+                    this.props.openEditModal(this.props.postID);
+                    this.setState({ show: false });
+                  }}
                 >
                   <div className="iconMaster">
                     <EditIcon />
@@ -95,10 +94,10 @@ class PostDropdown extends React.Component {
             {this.props.user._id === localStorage.getItem("profileID") ? (
               <div
                 className="dreamsDropDistance"
-                onClick={() => (
-                  this.props.deletePost(this.props.postID),
-                  this.setState({ show: false })
-                )}
+                onClick={() => {
+                  this.props.deletePost(this.props.postID);
+                  this.setState({ show: false });
+                }}
               >
                 <div className="iconMaster">
                   <DeleteOutlineIcon />
