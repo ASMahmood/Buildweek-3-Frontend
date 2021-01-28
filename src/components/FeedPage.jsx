@@ -11,7 +11,6 @@ import Likes from "./Likes";
 import PostDropdown from "./PostDropdown";
 import CommentsArea from "./CommentsArea";
 
-
 import "./styles/FeedPage.css";
 class FeedPage extends React.Component {
   state = {
@@ -23,7 +22,6 @@ class FeedPage extends React.Component {
     user: {},
     image: null,
     commentToAdd: "",
-
   };
 
   deletePost = async (id) => {
@@ -70,7 +68,6 @@ class FeedPage extends React.Component {
           });
           this.fetchPosts();
           this.setState({ show: false });
-
         }
       }
     } catch (error) {
@@ -238,6 +235,7 @@ class FeedPage extends React.Component {
                           <img
                             className="imageForPost"
                             style={{ objectFit: "cover" }}
+                            crossorigin="anonymous"
                             src={post.image}
                           />
                         )}
@@ -257,7 +255,6 @@ class FeedPage extends React.Component {
                       addCommentInState={this.addCommentInState}
                       addComment={this.addComment}
                     />
-
                   </Container>
                 ))}
               </Row>

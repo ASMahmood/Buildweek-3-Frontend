@@ -5,7 +5,8 @@ import { HiOutlinePhotograph } from "react-icons/hi";
 import { AiFillPlaySquare } from "react-icons/ai";
 import { GrNotes } from "react-icons/gr";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
-
+import Tenor from "react-tenor";
+import "react-tenor/dist/styles.css";
 import "../styles/StartPost.css";
 
 const { Component } = require("react");
@@ -14,14 +15,14 @@ const { Modal, Button, Form } = require("react-bootstrap");
 class StartPost extends Component {
   state = {
     show: false,
-    post: { 
-      text: "" ,
+    post: {
+      text: "",
       username: "ASMahmood",
       user_id: "600e9bba26717934c83387fd",
       comments: [],
-      image: ""
+      image: "default",
     },
-    image: null,
+    image: "default",
     errMessage: "",
   };
 
@@ -43,19 +44,22 @@ class StartPost extends Component {
     e.preventDefault();
     console.log(this.state.image);
     try {
-      const response = await fetch(
-        process.env.REACT_APP_SERVER + "/post",
-        {
-          method: "POST",
-          body: JSON.stringify({text:this.state.post.text,username:"ASMahmood",user_id:localStorage.getItem('profileID'),comments:[],image:"default"}),
-          headers: new Headers({
-            "Content-Type": "application/json",
-          }),
-        }
-      );
-      if (response.ok && this.state.image) {
+      const response = await fetch(process.env.REACT_APP_SERVER + "/post", {
+        method: "POST",
+        body: JSON.stringify({
+          text: this.state.post.text,
+          username: "ASMahmood",
+          user_id: localStorage.getItem("profileID"),
+          comments: [],
+          image: this.state.image,
+        }),
+        headers: new Headers({
+          "Content-Type": "application/json",
+        }),
+      });
+      if (response.ok && typeof this.state.image !== "string") {
         let hope = await response.json();
-        console.log(hope)
+        console.log(hope);
         await this.postImage(hope);
       } else if (response.ok) {
         alert("Post sent !");
@@ -97,7 +101,7 @@ class StartPost extends Component {
             }),
           }
         );
-        console.log("post a pic")
+        console.log("post a pic");
         this.handleClose();
         if (response.ok) {
           alert("Post sent with image !");
@@ -107,7 +111,6 @@ class StartPost extends Component {
             errMessage: "",
           });
           this.props.fetchPosts();
-          
         }
       }
     } catch (error) {
@@ -152,12 +155,12 @@ class StartPost extends Component {
               </Form.Group>
               {this.state.image && (
                 <div className="imagePreview">
-                  <img
+                  {/* <img
                     src={URL.createObjectURL(
                       document.querySelector("#postImage").files[0]
                     )}
                     alt="img-preview"
-                  />
+                  /> */}
                   <br />
                 </div>
               )}
@@ -185,6 +188,10 @@ class StartPost extends Component {
 
             <Modal.Footer>
               <div className="feed-btn-wrapper">
+                <Tenor
+                  token={process.env.REACT_APP_TENOR_TOKEN}
+                  onSelect={(result) => this.setState({ image: result.url })}
+                />
                 <Form.Label htmlFor="postImage">
                   <AttachFileIcon />
                 </Form.Label>
