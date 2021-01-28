@@ -25,14 +25,16 @@ class Navbar extends React.Component {
   };
 
   signOut = () => {
-    localStorage.removeItem('profileID')
-    this.props.history.push("/")
-  }
+    localStorage.removeItem("profileID");
+    this.props.history.push("/");
+  };
 
   fetchProfile = async () => {
     try {
       const response = await fetch(
-        process.env.REACT_APP_SERVER + "/profile/" + localStorage.getItem('profileID')
+        process.env.REACT_APP_SERVER +
+          "/profile/" +
+          localStorage.getItem("profileID")
       );
       const parsedResponse = await response.json();
       this.setState({ user: parsedResponse });
@@ -46,7 +48,7 @@ class Navbar extends React.Component {
       <Container fluid className="main-container">
         <div className="header container-lg">
           <div className="navbar-left">
-            <Link to="/" className="Linkedin-icon">
+            <Link to="/feed" className="Linkedin-icon">
               <AiFillLinkedin />
             </Link>
 
@@ -194,7 +196,9 @@ class Navbar extends React.Component {
                     Job Posting Account
                   </Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item eventKey="11" onClick={this.signOut}>Sign Out</Dropdown.Item>
+                  <Dropdown.Item eventKey="11" onClick={this.signOut}>
+                    Sign Out
+                  </Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </div>

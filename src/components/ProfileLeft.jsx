@@ -33,12 +33,6 @@ class ProfileLeft extends React.Component {
     this.fetchProfile();
   };
 
-  componentDidUpdate = (prevState) => {
-    if (prevState.user !== this.state.user) {
-      this.fetchProfile();
-    }
-  };
-
   toggleAlert() {
     this.setState((state) => ({
       showAlert: !state.showAlert,
@@ -48,7 +42,9 @@ class ProfileLeft extends React.Component {
   fetchProfile = async () => {
     try {
       let response = await fetch(
-        process.env.REACT_APP_SERVER + "/profile/" + localStorage.getItem('profileID')
+        process.env.REACT_APP_SERVER +
+          "/profile/" +
+          localStorage.getItem("profileID")
       );
       let parsedResponse = await response.json();
 
