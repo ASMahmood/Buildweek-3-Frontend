@@ -190,7 +190,9 @@ class StartPost extends Component {
               <div className="feed-btn-wrapper">
                 <Tenor
                   token={process.env.REACT_APP_TENOR_TOKEN}
-                  onSelect={(result) => this.setState({ image: result.url })}
+                  onSelect={(result) =>
+                    this.setState({ image: result.media[0].gif.url })
+                  }
                 />
                 <Form.Label htmlFor="postImage">
                   <AttachFileIcon />
