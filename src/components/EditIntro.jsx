@@ -24,7 +24,9 @@ class EditIntro extends Component {
     this.updateProfilePic();
 
     const url =
-      process.env.REACT_APP_SERVER + "/profile/" + localStorage.getItem('profileID');
+      process.env.REACT_APP_SERVER +
+      "/profile/" +
+      localStorage.getItem("profileID");
     try {
       const response = await fetch(url, {
         method: "PUT",
@@ -55,7 +57,7 @@ class EditIntro extends Component {
     try {
       const response = await fetch(
         process.env.REACT_APP_SERVER +
-          `/profile/${localStorage.getItem('profilePic')}/picture`,
+          `/profile/${localStorage.getItem("profileID")}/picture`,
         {
           method: "POST",
           headers: new Headers({
