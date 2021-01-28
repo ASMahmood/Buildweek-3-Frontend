@@ -16,7 +16,7 @@ import { RiPencilFill } from "react-icons/ri";
 import { AiOutlineDelete } from "react-icons/ai";
 import Moment from "react-moment";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
-
+import Likes from "./Likes";
 import "./styles/FeedPage.css";
 class FeedPage extends React.Component {
   state = {
@@ -26,7 +26,7 @@ class FeedPage extends React.Component {
     currentPostForEdit: {},
     editedText: "",
     user: {},
-    image:{}
+    image: {},
   };
 
   deletePost = async (id) => {
@@ -65,7 +65,7 @@ class FeedPage extends React.Component {
             }),
           }
         );
-        console.log("post a pic")
+        console.log("post a pic");
         this.handleClose();
         if (response.ok) {
           alert("Post sent with image !");
@@ -73,7 +73,6 @@ class FeedPage extends React.Component {
             image: null,
           });
           this.props.fetchPosts();
-          
         }
       }
     } catch (error) {
@@ -103,8 +102,8 @@ class FeedPage extends React.Component {
         body: JSON.stringify(requestBody),
       }
     );
-    if(this.state.image){
-      console.log("i am in")
+    if (this.state.image) {
+      console.log("i am in");
       await this.postImage(this.state.currentPostForEdit._id);
     }
     await this.fetchPosts();
@@ -121,7 +120,7 @@ class FeedPage extends React.Component {
       let response = await fetch(process.env.REACT_APP_SERVER + "/post");
       let parsedResponse = await response.json();
       console.log(parsedResponse);
-      parsedResponse = await parsedResponse.reverse()
+      parsedResponse = await parsedResponse.reverse();
       this.setState({ postArray: parsedResponse }, () => {
         console.log(this.state.postArray);
       });
@@ -171,7 +170,7 @@ class FeedPage extends React.Component {
                         <img
                           src={post.user_id.image}
                           className="profilePicPost"
-                          style = {{objectFit: "cover"}}
+                          style={{ objectFit: "cover" }}
                         />{" "}
                       </Col>
                       <Col sm={8}>
@@ -208,8 +207,21 @@ class FeedPage extends React.Component {
                     <Row className="imagePostRow">
                       <Col className="d-flex justify-content-center">
                         {" "}
-                        <img className="imageForPost" src={post.image} />
+                        {post.image !== "default" && (
+                          <img
+                            className="imageForPost"
+                            style={{ objectFit: "cover" }}
+                            src={post.image}
+                          />
+                        )}
                       </Col>
+                    </Row>
+                    <Row>
+                      <Likes
+                        likes={post.likes}
+                        postID={post._id}
+                        fetchPosts={this.fetchPosts}
+                      />
                     </Row>
                   </Container>
                 ))}
@@ -242,16 +254,16 @@ class FeedPage extends React.Component {
             </Form>
           </Modal.Body>
           <Modal.Footer>
-          <Form.Label htmlFor="postImage">
-                  <AttachFileIcon />
-                </Form.Label>
-                <Form.Control
-                  type="file"
-                  className="visually-hidden"
-                  id="postImage"
-                  accept="image/*"
-                  onChange={(e) => this.setState({ image: e.target.files[0] })}
-                />
+            <Form.Label htmlFor="postImage">
+              <AttachFileIcon />
+            </Form.Label>
+            <Form.Control
+              type="file"
+              className="visually-hidden"
+              id="postImage"
+              accept="image/*"
+              onChange={(e) => this.setState({ image: e.target.files[0] })}
+            />
             <Button
               variant="secondary"
               onClick={() => this.setState({ show: false })}
