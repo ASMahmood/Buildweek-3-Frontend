@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Spinner,
-  Image,
-  Button,
-  Modal,
-  Form,
-} from "react-bootstrap";
+import { Container, Row, Col, Button, Modal, Form } from "react-bootstrap";
 import CreateFeed from "./CreateFeed";
 import HomeProfile from "./HomeProfile";
 import HomeRight from "./HomeRight";
@@ -16,6 +7,7 @@ import { RiPencilFill } from "react-icons/ri";
 import { AiOutlineDelete } from "react-icons/ai";
 import Moment from "react-moment";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
+import CommentsArea from "./CommentsArea";
 
 import "./styles/FeedPage.css";
 class FeedPage extends React.Component {
@@ -26,9 +18,8 @@ class FeedPage extends React.Component {
     currentPostForEdit: {},
     editedText: "",
     user: {},
-    image:{},
-    commentToAdd:"",
-    showComments:false
+    image: {},
+    commentToAdd: "",
   };
 
   deletePost = async (id) => {
@@ -67,7 +58,7 @@ class FeedPage extends React.Component {
             }),
           }
         );
-        console.log("post a pic")
+        console.log("post a pic");
         this.handleClose();
         if (response.ok) {
           alert("Post sent with image !");
@@ -75,7 +66,6 @@ class FeedPage extends React.Component {
             image: null,
           });
           this.props.fetchPosts();
-          
         }
       }
     } catch (error) {
@@ -105,8 +95,8 @@ class FeedPage extends React.Component {
         body: JSON.stringify(requestBody),
       }
     );
-    if(this.state.image){
-      console.log("i am in")
+    if (this.state.image) {
+      console.log("i am in");
       await this.postImage(this.state.currentPostForEdit._id);
     }
     await this.fetchPosts();
@@ -123,7 +113,7 @@ class FeedPage extends React.Component {
       let response = await fetch(process.env.REACT_APP_SERVER + "/post");
       let parsedResponse = await response.json();
       console.log(parsedResponse);
-      parsedResponse = await parsedResponse.reverse()
+      parsedResponse = await parsedResponse.reverse();
       this.setState({ postArray: parsedResponse }, () => {
         console.log(this.state.postArray);
       });
@@ -145,37 +135,36 @@ class FeedPage extends React.Component {
       console.log(error);
     }
   };
-showComments = () =>
-{
-  this.state.showComments ? this.setState({showComments:false}) : this.setState({showComments:true})
-}
-addCommentInState = async(e,postID) => {
-  this.setState({commentToAdd:e.currentTarget.value})
-}
-addComment = async(postID) => {
-  const comment = {text:this.state.commentToAdd,username:"default",user_id:this.state.user._id,post_id:postID}
 
-  try {
-    const response = await fetch(
-      process.env.REACT_APP_SERVER + "/comment",
-      {
+  addCommentInState = async (e, postID) => {
+    this.setState({ commentToAdd: e.currentTarget.value });
+  };
+  addComment = async (postID) => {
+    const comment = {
+      text: this.state.commentToAdd,
+      username: "default",
+      user_id: this.state.user._id,
+      post_id: postID,
+    };
+
+    try {
+      const response = await fetch(process.env.REACT_APP_SERVER + "/comment", {
         method: "POST",
         body: JSON.stringify(comment),
         headers: new Headers({
           "Content-Type": "application/json",
         }),
-      }
-    );
-  console.log(response)
+      });
+      console.log(response);
       alert("Post sent !");
       this.setState({
-        commentToAdd:""
+        commentToAdd: "",
       });
-      this.fetchPosts()
-  } catch (e) {
-    console.log(e); // Error
-  }
-}
+      this.fetchPosts();
+    } catch (e) {
+      console.log(e); // Error
+    }
+  };
   render() {
     return (
       <>
@@ -203,7 +192,7 @@ addComment = async(postID) => {
                         <img
                           src={post.user_id.image}
                           className="profilePicPost"
-                          style = {{objectFit: "cover"}}
+                          style={{ objectFit: "cover" }}
                         />{" "}
                       </Col>
                       <Col sm={8}>
@@ -243,21 +232,11 @@ addComment = async(postID) => {
                         <img className="imageForPost" src={post.image} />
                       </Col>
                     </Row>
-                    <p onClick={()=>this.showComments()}>Comments {post.comments.length}</p>
-               
-                    <Container className = {this.state.showComments ? "" : "d-none"}>
-                    {post.comments.length > 0 && post.comments.map((comment) => 
-                    (<Row className = "singleCommentRow"><img src = {comment.user_id[0].image} className = "commentProfilePic"/>{comment.user_id[0].username} : {comment.text} </Row> 
-                    ))}
-                    <Form>
-  <Form.Group controlId="exampleForm.ControlInput1">
-    <Form.Label>Add a comment</Form.Label>
-    <Form.Control type="text" placeholder="Your comment" onChange = {(e) => this.addCommentInState(e,post._id)}></Form.Control>
-    <Button className = "addCommentBtn" onClick ={()=>this.addComment(post._id)}>Submit Comment </Button> 
-  </Form.Group>
-  </Form>
-                    </Container>
-
+                    <CommentsArea
+                      post={post}
+                      addCommentInState={this.addCommentInState}
+                      addComment={this.addComment}
+                    />
                   </Container>
                 ))}
               </Row>
@@ -289,16 +268,16 @@ addComment = async(postID) => {
             </Form>
           </Modal.Body>
           <Modal.Footer>
-          <Form.Label htmlFor="postImage">
-                  <AttachFileIcon />
-                </Form.Label>
-                <Form.Control
-                  type="file"
-                  className="visually-hidden"
-                  id="postImage"
-                  accept="image/*"
-                  onChange={(e) => this.setState({ image: e.target.files[0] })}
-                />
+            <Form.Label htmlFor="postImage">
+              <AttachFileIcon />
+            </Form.Label>
+            <Form.Control
+              type="file"
+              className="visually-hidden"
+              id="postImage"
+              accept="image/*"
+              onChange={(e) => this.setState({ image: e.target.files[0] })}
+            />
             <Button
               variant="secondary"
               onClick={() => this.setState({ show: false })}
