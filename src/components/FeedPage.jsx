@@ -7,7 +7,10 @@ import { RiPencilFill } from "react-icons/ri";
 import { AiOutlineDelete } from "react-icons/ai";
 import Moment from "react-moment";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
+import Likes from "./Likes";
+import PostDropdown from "./PostDropdown";
 import CommentsArea from "./CommentsArea";
+
 
 import "./styles/FeedPage.css";
 class FeedPage extends React.Component {
@@ -18,8 +21,9 @@ class FeedPage extends React.Component {
     currentPostForEdit: {},
     editedText: "",
     user: {},
-    image: {},
+    image: null,
     commentToAdd: "",
+
   };
 
   deletePost = async (id) => {
@@ -59,13 +63,14 @@ class FeedPage extends React.Component {
           }
         );
         console.log("post a pic");
-        this.handleClose();
         if (response.ok) {
           alert("Post sent with image !");
           this.setState({
             image: null,
           });
-          this.props.fetchPosts();
+          this.fetchPosts();
+          this.setState({ show: false });
+
         }
       }
     } catch (error) {
@@ -80,11 +85,10 @@ class FeedPage extends React.Component {
       text: this.state.editedText,
       username: this.state.currentPostForEdit.username,
       user_id: this.state.currentPostForEdit.user_id._id,
-      image: this.state.image,
     };
 
     //fetching`
-    let response = await fetch(
+    await fetch(
       process.env.REACT_APP_SERVER +
         `/post/${this.state.currentPostForEdit._id}`,
       {
@@ -98,8 +102,10 @@ class FeedPage extends React.Component {
     if (this.state.image) {
       console.log("i am in");
       await this.postImage(this.state.currentPostForEdit._id);
+    } else {
+      await this.fetchPosts();
+      this.setState({ show: false });
     }
-    await this.fetchPosts();
   };
   componentDidMount = () => {
     this.fetchPosts();
@@ -195,7 +201,7 @@ class FeedPage extends React.Component {
                           style={{ objectFit: "cover" }}
                         />{" "}
                       </Col>
-                      <Col sm={8}>
+                      <Col sm={9}>
                         <Row className="postUsername">
                           <p>{post.user_id.username}</p>
                         </Row>
@@ -207,16 +213,15 @@ class FeedPage extends React.Component {
                           </p>
                         </Row>
                       </Col>
+
                       <Col sm={1}>
-                        <RiPencilFill
-                          className="pen"
-                          onClick={() => this.openEditPostModal(post._id)}
-                        />
-                      </Col>
-                      <Col sm={1}>
-                        <AiOutlineDelete
-                          className="bin"
-                          onClick={() => this.deletePost(post._id)}
+                        <PostDropdown
+                          postID={post._id}
+                          postBody={post.text}
+                          user={post.user_id}
+                          openEditModal={this.openEditPostModal}
+                          fetchPosts={this.fetchPosts}
+                          deletePost={this.deletePost}
                         />
                       </Col>
                     </Row>
@@ -229,14 +234,30 @@ class FeedPage extends React.Component {
                     <Row className="imagePostRow">
                       <Col className="d-flex justify-content-center">
                         {" "}
-                        <img className="imageForPost" src={post.image} />
+                        {post.image !== "default" && (
+                          <img
+                            className="imageForPost"
+                            style={{ objectFit: "cover" }}
+                            src={post.image}
+                          />
+                        )}
                       </Col>
                     </Row>
+
+                    <Row>
+                      <Likes
+                        likes={post.likes}
+                        postID={post._id}
+                        fetchPosts={this.fetchPosts}
+                      />
+                    </Row>
+
                     <CommentsArea
                       post={post}
                       addCommentInState={this.addCommentInState}
                       addComment={this.addComment}
                     />
+
                   </Container>
                 ))}
               </Row>
