@@ -17,17 +17,22 @@ import { withRouter, NavLink, Link } from "react-router-dom";
 
 class Navbar extends React.Component {
   state = {
-    user: "",
+    user: {},
   };
 
   componentDidMount = () => {
     this.fetchProfile();
   };
 
+  signOut = () => {
+    localStorage.removeItem('profileID')
+    this.props.history.push("/")
+  }
+
   fetchProfile = async () => {
     try {
       const response = await fetch(
-        process.env.REACT_APP_SERVER + "/profile/" + process.env.REACT_APP_ME
+        process.env.REACT_APP_SERVER + "/profile/" + localStorage.getItem('profileID')
       );
       const parsedResponse = await response.json();
       this.setState({ user: parsedResponse });
@@ -171,7 +176,7 @@ class Navbar extends React.Component {
                   <Dropdown.Item eventKey="4">
                     <Button
                       id="profileButton"
-                      onClick={() => this.props.history.push("/")}
+                      onClick={() => this.props.history.push("/me")}
                     >
                       View Profile
                     </Button>
@@ -189,7 +194,7 @@ class Navbar extends React.Component {
                     Job Posting Account
                   </Dropdown.Item>
                   <Dropdown.Divider />
-                  <Dropdown.Item eventKey="11">Sign Out</Dropdown.Item>
+                  <Dropdown.Item eventKey="11" onClick={this.signOut}>Sign Out</Dropdown.Item>
                 </Dropdown.Menu>
               </Dropdown>
             </div>

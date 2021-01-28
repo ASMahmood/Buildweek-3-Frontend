@@ -24,6 +24,7 @@ class FeedPage extends React.Component {
     postIdForEdit: "",
     currentPostForEdit: {},
     editedText: "",
+    user: {}
   };
 
   deletePost = async (id) => {
@@ -73,6 +74,7 @@ class FeedPage extends React.Component {
   };
   componentDidMount = () => {
     this.fetchPosts();
+    this.fetchUser()
     // this.fetchProfiles();
   };
 
@@ -87,6 +89,18 @@ class FeedPage extends React.Component {
       });
     } catch (error) {
       console.log("uh oh stinky when fetching all the posts", error);
+    }
+  };
+
+  fetchUser = async () => {
+    try {
+      let response = await fetch(
+        process.env.REACT_APP_SERVER + "/profile/" + localStorage.getItem('profileID'),
+      );
+      let parsedResponse = await response.json();
+      this.setState({ user: parsedResponse });
+    } catch (error) {
+      console.log(error);
     }
   };
 

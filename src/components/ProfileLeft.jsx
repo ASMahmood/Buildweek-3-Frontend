@@ -48,7 +48,7 @@ class ProfileLeft extends React.Component {
   fetchProfile = async () => {
     try {
       let response = await fetch(
-        process.env.REACT_APP_SERVER + "/profile/" + process.env.REACT_APP_ME
+        process.env.REACT_APP_SERVER + "/profile/" + localStorage.getItem('profileID')
       );
       let parsedResponse = await response.json();
 

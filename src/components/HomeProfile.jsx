@@ -10,43 +10,22 @@ class HomeProfile extends React.Component {
     user: "",
   };
 
-  componentDidMount = () => {
-    this.fetchUser();
-  };
-
-  fetchUser = async () => {
-    try {
-      let response = await fetch(
-        process.env.REACT_APP_SERVER + "/profile/" + process.env.REACT_APP_ME,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
-          },
-        }
-      );
-      let parsedResponse = await response.json();
-      console.log("parsedResponse::::::::::::::::", parsedResponse);
-      this.setState({ user: parsedResponse });
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   render() {
     return (
       <div id="wrapper">
         <div className="profile-wrapper">
           <img src="/assets/images/cover.jpg" alt="cover" class="cover-img" />
-          <img src={this.state.user.image} alt="profile" class="profile-img" />
+          <img src={this.props.user.image} alt="profile" class="profile-img" />
           <div
             class="profile-info"
             onClick={() => this.props.history.push("/")}
             style={{ cursor: "pointer" }}
           >
             <h6>
-              {this.state.user.name} {this.state.user.surname}
+              {this.props.user.name} {this.props.user.surname}
             </h6>
-            <p>{this.state.user.title}</p>
+            <p>{this.props.user.title}</p>
           </div>
           <hr />
           <Row className="growNetwork prof-section">
@@ -73,7 +52,6 @@ class HomeProfile extends React.Component {
           <hr />
           <div
             class="profile-saved-items"
-            onClick={() => this.props.toggleSaved()}
           >
             <Row>
               <Col xs={1}>

@@ -14,7 +14,7 @@ class RightSideColumn extends React.Component {
       let response = await fetch(process.env.REACT_APP_SERVER + "/profile/");
       let parsedResponse = await response.json();
       const filteredProfiles = parsedResponse.filter(
-        (profile) => profile._id !== process.env.REACT_APP_ME
+        (profile) => profile._id !== localStorage.getItem('profileID')
       );
       console.log(filteredProfiles);
       this.setState({ other: filteredProfiles });
