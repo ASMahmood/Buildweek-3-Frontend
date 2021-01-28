@@ -26,7 +26,9 @@ class FeedPage extends React.Component {
     currentPostForEdit: {},
     editedText: "",
     user: {},
-    image:{}
+    image:{},
+    commentToAdd:"",
+    showComments:false
   };
 
   deletePost = async (id) => {
@@ -143,7 +145,37 @@ class FeedPage extends React.Component {
       console.log(error);
     }
   };
+showComments = () =>
+{
+  this.state.showComments ? this.setState({showComments:false}) : this.setState({showComments:true})
+}
+addCommentInState = async(e,postID) => {
+  this.setState({commentToAdd:e.currentTarget.value})
+}
+addComment = async(postID) => {
+  const comment = {text:this.state.commentToAdd,username:"default",user_id:this.state.user._id,post_id:postID}
 
+  try {
+    const response = await fetch(
+      process.env.REACT_APP_SERVER + "/comment",
+      {
+        method: "POST",
+        body: JSON.stringify(comment),
+        headers: new Headers({
+          "Content-Type": "application/json",
+        }),
+      }
+    );
+  console.log(response)
+      alert("Post sent !");
+      this.setState({
+        commentToAdd:""
+      });
+      this.fetchPosts()
+  } catch (e) {
+    console.log(e); // Error
+  }
+}
   render() {
     return (
       <>
@@ -211,6 +243,21 @@ class FeedPage extends React.Component {
                         <img className="imageForPost" src={post.image} />
                       </Col>
                     </Row>
+                    <p onClick={()=>this.showComments()}>Comments {post.comments.length}</p>
+               
+                    <Container className = {this.state.showComments ? "" : "d-none"}>
+                    {post.comments.length > 0 && post.comments.map((comment) => 
+                    (<Row className = "singleCommentRow"><img src = {comment.user_id[0].image} className = "commentProfilePic"/>{comment.user_id[0].username} : {comment.text} </Row> 
+                    ))}
+                    <Form>
+  <Form.Group controlId="exampleForm.ControlInput1">
+    <Form.Label>Add a comment</Form.Label>
+    <Form.Control type="text" placeholder="Your comment" onChange = {(e) => this.addCommentInState(e,post._id)}></Form.Control>
+    <Button className = "addCommentBtn" onClick ={()=>this.addComment(post._id)}>Submit Comment </Button> 
+  </Form.Group>
+  </Form>
+                    </Container>
+
                   </Container>
                 ))}
               </Row>
