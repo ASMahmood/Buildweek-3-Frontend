@@ -1,14 +1,5 @@
 import React from "react";
-import {
-  Container,
-  Row,
-  Col,
-  Spinner,
-  Image,
-  Button,
-  Modal,
-  Form,
-} from "react-bootstrap";
+import { Container, Row, Col, Button, Modal, Form } from "react-bootstrap";
 import CreateFeed from "./CreateFeed";
 import HomeProfile from "./HomeProfile";
 import HomeRight from "./HomeRight";
@@ -18,6 +9,9 @@ import Moment from "react-moment";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
 import Likes from "./Likes";
 import PostDropdown from "./PostDropdown";
+import CommentsArea from "./CommentsArea";
+
+
 import "./styles/FeedPage.css";
 class FeedPage extends React.Component {
   state = {
@@ -28,6 +22,8 @@ class FeedPage extends React.Component {
     editedText: "",
     user: {},
     image: null,
+    commentToAdd: "",
+
   };
 
   deletePost = async (id) => {
@@ -74,6 +70,7 @@ class FeedPage extends React.Component {
           });
           this.fetchPosts();
           this.setState({ show: false });
+
         }
       }
     } catch (error) {
@@ -145,6 +142,35 @@ class FeedPage extends React.Component {
     }
   };
 
+  addCommentInState = async (e, postID) => {
+    this.setState({ commentToAdd: e.currentTarget.value });
+  };
+  addComment = async (postID) => {
+    const comment = {
+      text: this.state.commentToAdd,
+      username: "default",
+      user_id: this.state.user._id,
+      post_id: postID,
+    };
+
+    try {
+      const response = await fetch(process.env.REACT_APP_SERVER + "/comment", {
+        method: "POST",
+        body: JSON.stringify(comment),
+        headers: new Headers({
+          "Content-Type": "application/json",
+        }),
+      });
+      console.log(response);
+      alert("Post sent !");
+      this.setState({
+        commentToAdd: "",
+      });
+      this.fetchPosts();
+    } catch (e) {
+      console.log(e); // Error
+    }
+  };
   render() {
     return (
       <>
@@ -217,6 +243,7 @@ class FeedPage extends React.Component {
                         )}
                       </Col>
                     </Row>
+
                     <Row>
                       <Likes
                         likes={post.likes}
@@ -224,6 +251,13 @@ class FeedPage extends React.Component {
                         fetchPosts={this.fetchPosts}
                       />
                     </Row>
+
+                    <CommentsArea
+                      post={post}
+                      addCommentInState={this.addCommentInState}
+                      addComment={this.addComment}
+                    />
+
                   </Container>
                 ))}
               </Row>
