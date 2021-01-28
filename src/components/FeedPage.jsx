@@ -27,7 +27,7 @@ class FeedPage extends React.Component {
     currentPostForEdit: {},
     editedText: "",
     user: {},
-    image: {},
+    image: null,
   };
 
   deletePost = async (id) => {
@@ -67,13 +67,13 @@ class FeedPage extends React.Component {
           }
         );
         console.log("post a pic");
-        this.handleClose();
         if (response.ok) {
           alert("Post sent with image !");
           this.setState({
             image: null,
           });
-          this.props.fetchPosts();
+          this.fetchPosts();
+          this.setState({ show: false });
         }
       }
     } catch (error) {
@@ -88,11 +88,10 @@ class FeedPage extends React.Component {
       text: this.state.editedText,
       username: this.state.currentPostForEdit.username,
       user_id: this.state.currentPostForEdit.user_id._id,
-      image: this.state.image,
     };
 
     //fetching`
-    let response = await fetch(
+    await fetch(
       process.env.REACT_APP_SERVER +
         `/post/${this.state.currentPostForEdit._id}`,
       {
@@ -106,8 +105,10 @@ class FeedPage extends React.Component {
     if (this.state.image) {
       console.log("i am in");
       await this.postImage(this.state.currentPostForEdit._id);
+    } else {
+      await this.fetchPosts();
+      this.setState({ show: false });
     }
-    await this.fetchPosts();
   };
   componentDidMount = () => {
     this.fetchPosts();
@@ -174,7 +175,7 @@ class FeedPage extends React.Component {
                           style={{ objectFit: "cover" }}
                         />{" "}
                       </Col>
-                      <Col sm={8}>
+                      <Col sm={9}>
                         <Row className="postUsername">
                           <p>{post.user_id.username}</p>
                         </Row>
@@ -186,17 +187,13 @@ class FeedPage extends React.Component {
                           </p>
                         </Row>
                       </Col>
-                      <Col sm={1}>
-                        <RiPencilFill
-                          className="pen"
-                          onClick={() => this.openEditPostModal(post._id)}
-                        />
-                      </Col>
+
                       <Col sm={1}>
                         <PostDropdown
                           postID={post._id}
                           postBody={post.text}
                           user={post.user_id}
+                          openEditModal={this.openEditPostModal}
                           fetchPosts={this.fetchPosts}
                           deletePost={this.deletePost}
                         />

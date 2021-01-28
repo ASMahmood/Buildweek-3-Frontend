@@ -9,6 +9,7 @@ import VisibilityIcon from "@material-ui/icons/Visibility";
 import { BsLink45Deg, BsFillFlagFill } from "react-icons/bs";
 import EditPostImage from "./EditPostImage";
 import EditPost from "./EditPost";
+import EditIcon from "@material-ui/icons/Edit";
 
 class PostDropdown extends React.Component {
   state = {
@@ -56,11 +57,23 @@ class PostDropdown extends React.Component {
             </div>
             {this.props.user._id === localStorage.getItem("profileID") ? (
               <>
-                <EditPost
-                  postID={this.props.postID}
-                  postBody={this.props.postBody}
-                  fetchPosts={this.props.fetchPosts}
-                />
+                <div
+                  className="dreamsDropDistance"
+                  onClick={() => (
+                    this.props.openEditModal(this.props.postID),
+                    this.setState({ show: false })
+                  )}
+                >
+                  <div className="iconMaster">
+                    <EditIcon />
+                  </div>
+                  <div className="megatron">
+                    <span className="is">Change your post?</span>
+                    <span className="dumb">
+                      If you've made a mistake, you can fix it!
+                    </span>
+                  </div>
+                </div>
               </>
             ) : (
               <div className="dreamsDropDistance">
