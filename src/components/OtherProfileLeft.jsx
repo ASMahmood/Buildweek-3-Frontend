@@ -16,15 +16,12 @@ class OtherProfileLeft extends React.Component {
   handleShow = () => this.setState({ modalShow: true });
 
   componentDidMount = () => {
-    this.fetchExperience();
     this.fetchProfile();
   };
 
   componentDidUpdate = (prevProps, prevState) => {
     if (prevProps.userid !== this.props.userid) {
       console.log(this.state.user, "this.state.user");
-
-      this.fetchExperience();
       this.fetchProfile();
     }
   };
@@ -32,38 +29,16 @@ class OtherProfileLeft extends React.Component {
   fetchProfile = async () => {
     try {
       let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/profile/" +
-          this.props.userid,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
-          },
-        }
+        process.env.REACT_APP_SERVER + "/profile/" + this.props.userid
       );
       let parsedResponse = await response.json();
       console.log(parsedResponse);
-      this.setState({ user: parsedResponse });
+      this.setState({
+        user: parsedResponse,
+        experiences: parsedResponse.experiences,
+      });
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  fetchExperience = async () => {
-    try {
-      const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${this.props.userid}/experiences`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
-          },
-        }
-      );
-
-      const parsedResponse = await response.json();
-      console.log(parsedResponse, "experience");
-      this.setState({ experiences: parsedResponse });
-    } catch (error) {
-      console.log("Error at experiences:", error);
     }
   };
 

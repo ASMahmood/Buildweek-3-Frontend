@@ -20,6 +20,8 @@ class FormModal extends React.Component {
               endDate: "",
               description: "",
               area: "",
+              username: this.props.username,
+              profileID: this.props.userId,
             },
     };
     this.fileRef = React.createRef();
@@ -36,19 +38,18 @@ class FormModal extends React.Component {
       await this.fetchExpImg(this.props.expId);
       // await this.cheekyFetch();
     }
-    this.props.fetchExperience();
+    this.props.fetchProfile();
   };
 
   postExperience = async () => {
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${this.props.userId}/experiences`,
+        process.env.REACT_APP_SERVER + `/experience/`,
         {
           method: "POST",
           body: JSON.stringify(this.state.experience),
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
           },
         }
       );
@@ -66,7 +67,7 @@ class FormModal extends React.Component {
 
         this.setState({ experience: message, loading: false });
         this.handleClose();
-        this.props.fetchExperience();
+        this.props.fetchProfile();
       }
     } catch (error) {
       console.log(error);
@@ -76,17 +77,16 @@ class FormModal extends React.Component {
   editExperience = async () => {
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${this.props.userId}/experiences/${this.props.expId}`,
+        process.env.REACT_APP_SERVER + `/experience/${this.props.expId}`,
         {
           method: "PUT",
           body: JSON.stringify(this.state.experience),
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
           },
         }
       );
-      let message = await response.json();
+
       if (response.ok) {
         this.handleClose();
       }
@@ -116,17 +116,14 @@ class FormModal extends React.Component {
     e.preventDefault();
     try {
       let response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${this.props.userId}/experiences/${this.props.expId}`,
+        process.env.REACT_APP_SERVER + `/experience/${this.props.expId}`,
         {
           method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
-          },
         }
       );
       if (response.ok && this.props.expId !== expId) {
         this.handleClose();
-        this.props.fetchExperience();
+        this.props.fetchProfile();
       }
     } catch (error) {
       console.log(error);
@@ -139,17 +136,13 @@ class FormModal extends React.Component {
 
   fetchExpImg = async (expID) => {
     const formData = new FormData();
-    formData.append("experience", this.state.selectedFile);
+    formData.append("profilePic", this.state.selectedFile);
     try {
       const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${this.props.userId}/experiences/${expID}/picture`,
-
+        process.env.REACT_APP_SERVER + `/experience/${expID}/picture`,
         {
           body: formData,
           method: "POST",
-          headers: new Headers({
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
-          }),
         }
       );
       if (response.ok) {

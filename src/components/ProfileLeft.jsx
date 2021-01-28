@@ -35,7 +35,7 @@ class ProfileLeft extends React.Component {
 
   componentDidUpdate = (prevState) => {
     if (prevState.user !== this.state.user) {
-      this.fetchExperience();
+      this.fetchProfile();
     }
   };
 
@@ -48,36 +48,17 @@ class ProfileLeft extends React.Component {
   fetchProfile = async () => {
     try {
       let response = await fetch(
-        "http://localhost:3002/profile/600e9bba26717934c83387fd",
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
-          },
-        }
+        process.env.REACT_APP_SERVER + "/profile/" + process.env.REACT_APP_ME
       );
       let parsedResponse = await response.json();
 
-      this.setState({ user: parsedResponse, loading: false });
+      this.setState({
+        user: parsedResponse,
+        experiences: parsedResponse.experiences,
+        loading: false,
+      });
     } catch (error) {
       console.log(error);
-    }
-  };
-
-  fetchExperience = async () => {
-    try {
-      const response = await fetch(
-        `https://striveschool-api.herokuapp.com/api/profile/${this.state.user._id}/experiences`,
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
-          },
-        }
-      );
-
-      const parsedResponse = await response.json();
-      this.setState({ experiences: parsedResponse, loading: false });
-    } catch (error) {
-      console.log("Error at experiences:", error);
     }
   };
 
@@ -229,8 +210,9 @@ class ProfileLeft extends React.Component {
               >
                 <Form
                   userId={this.state.user._id}
+                  username={this.state.user.username}
                   method="POST"
-                  fetchExperience={this.fetchExperience}
+                  fetchProfile={this.fetchProfile}
                 />
               </span>
             </Col>
@@ -282,7 +264,7 @@ class ProfileLeft extends React.Component {
                 experience={experience}
                 expId={experience._id}
                 method="PUT"
-                fetchExperience={this.fetchExperience}
+                fetchProfile={this.fetchProfile}
               />
               {/* <Button id="edit-btn" onClick={() => this.editExperience()}>
                 <BiPencil />

@@ -1,5 +1,14 @@
 import React from "react";
-import { Container, Row, Col, Spinner,Image,Button,Modal,Form } from "react-bootstrap";
+import {
+  Container,
+  Row,
+  Col,
+  Spinner,
+  Image,
+  Button,
+  Modal,
+  Form,
+} from "react-bootstrap";
 import CreateFeed from "./CreateFeed";
 import HomeProfile from "./HomeProfile";
 import HomeRight from "./HomeRight";
@@ -11,80 +20,69 @@ import "./styles/FeedPage.css";
 class FeedPage extends React.Component {
   state = {
     postArray: [],
-    show:false,
-    postIdForEdit:"",
-    currentPostForEdit:{},
-    editedText:""
+    show: false,
+    postIdForEdit: "",
+    currentPostForEdit: {},
+    editedText: "",
   };
 
   deletePost = async (id) => {
-    await fetch(
-      `https://buildweek-3.herokuapp.com/post/${id}`,
-      {
-        method: 'DELETE'
-      }
-    );
-    this.fetchPosts()
-  }
-  openEditPostModal = async (id) => {
-   console.log(id);
-   
-   try {
-    let response = await fetch(
-      `https://buildweek-3.herokuapp.com/post/${id}`,
-      {
-        headers: {
-          Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
-        },
-      }
-    );
-    let parsedResponse = await response.json();
-    this.setState({ currentPostForEdit: parsedResponse}, () => {
-      console.log(this.state.currentPostForEdit);
+    await fetch(process.env.REACT_APP_SERVER + `/post/${id}`, {
+      method: "DELETE",
     });
-    this.setState({show:true})
-  } catch (error) {
-    console.log("problem with getting psots ->", error);
-  }
-  }
+    this.fetchPosts();
+  };
+  openEditPostModal = async (id) => {
+    console.log(id);
+
+    try {
+      let response = await fetch(process.env.REACT_APP_SERVER + `/post/${id}`);
+      let parsedResponse = await response.json();
+      this.setState({ currentPostForEdit: parsedResponse }, () => {
+        console.log(this.state.currentPostForEdit);
+      });
+      this.setState({ show: true });
+    } catch (error) {
+      console.log("problem with getting psots ->", error);
+    }
+  };
   updatePost = async () => {
-   let editedPost = this.state.currentPostForEdit
-   editedPost.text = this.state.editedText
-   this.setState({currentPostForEdit:editedPost})
-   let requestBody = {text:this.state.editedText,username:this.state.currentPostForEdit.username,user_id:this.state.currentPostForEdit.user_id._id,image:this.state.currentPostForEdit.image}
-   
-   //fetching`
-let response = await fetch(
-  `https://buildweek-3.herokuapp.com/post/${this.state.currentPostForEdit._id}`,
-  {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(requestBody)
-  }
-);
-await this.fetchPosts()
-  }
+    let editedPost = this.state.currentPostForEdit;
+    editedPost.text = this.state.editedText;
+    this.setState({ currentPostForEdit: editedPost });
+    let requestBody = {
+      text: this.state.editedText,
+      username: this.state.currentPostForEdit.username,
+      user_id: this.state.currentPostForEdit.user_id._id,
+      image: this.state.currentPostForEdit.image,
+    };
+
+    //fetching`
+    let response = await fetch(
+      process.env.REACT_APP_SERVER +
+        `/post/${this.state.currentPostForEdit._id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(requestBody),
+      }
+    );
+    await this.fetchPosts();
+  };
   componentDidMount = () => {
     this.fetchPosts();
-   // this.fetchProfiles();
+    // this.fetchProfiles();
   };
 
   fetchPosts = async () => {
     this.setState({ loading: true });
     try {
-      let response = await fetch(
-        "https://buildweek-3.herokuapp.com/post",
-        {
-          headers: {
-            Authorization: `Bearer ${process.env.REACT_APP_BE_URL}`,
-          },
-        }
-      );
+      let response = await fetch(process.env.REACT_APP_SERVER + "/post");
       let parsedResponse = await response.json();
       console.log(parsedResponse);
-      this.setState({ postArray: parsedResponse}, () => {
+      this.setState({ postArray: parsedResponse }, () => {
         console.log(this.state.postArray);
       });
     } catch (error) {
@@ -92,11 +90,10 @@ await this.fetchPosts()
     }
   };
 
- 
-
   render() {
     return (
       <>
+
       <Container style={{ marginTop: "2rem" }}>
         <Row id="hopesAndDreams">
           <Col md={2}>
@@ -169,8 +166,8 @@ await this.fetchPosts()
 
 </>
 
-//modal for edit post
 
+      //modal for edit post
     );
   }
 }
