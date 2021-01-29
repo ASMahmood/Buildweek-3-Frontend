@@ -4,8 +4,9 @@ import "./styles/FeedPage.css";
 import { TiPencil } from "react-icons/ti";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { AiOutlineComment } from "react-icons/ai";
+import { withRouter } from "react-router-dom";
 
-export default class CommentsArea extends Component {
+class CommentsArea extends Component {
   state = {
     showComments: false,
     show: false,
@@ -61,32 +62,34 @@ export default class CommentsArea extends Component {
                     src={comment.user_id[0].image}
                     className="commentProfilePic"
                     alt="profile"
+                    onClick={() =>
+                      this.props.history.push(
+                        "/profile/" + comment.user_id[0]._id
+                      )
+                    }
                   />
                 </div>
                 <p
-                  className="mt-2"
+                  className="mt-2 position-relative"
                   style={{ width: "90%", overflowWrap: "anywhere" }}
                 >
                   <strong>{comment.user_id[0].username}: </strong>
                   {comment.text}
-                </p>
-                {comment.user_id[0].username === this.props.username && (
-                  <>
-                    <Col sm={1}>
-                      <p onClick={() => this.props.deleteComment(comment._id)}>
-                        <RiDeleteBin6Line className="emoji" />
-                      </p>
-                    </Col>
-                    <Col>
+                  {comment.user_id[0].username === this.props.username && (
+                    <div className="d-flex flex-column justify-content-center binAndEdit">
+                      <RiDeleteBin6Line
+                        className="emoji mb-2"
+                        onClick={() => this.props.deleteComment(comment._id)}
+                      />
                       <TiPencil
                         className="emoji"
                         onClick={() =>
                           this.changeComment(comment.text, comment._id)
                         }
                       />{" "}
-                    </Col>
-                  </>
-                )}
+                    </div>
+                  )}
+                </p>
               </Row>
             ))}
           <Form>
@@ -148,3 +151,5 @@ export default class CommentsArea extends Component {
     );
   }
 }
+
+export default withRouter(CommentsArea);

@@ -9,6 +9,8 @@ import Likes from "./Likes";
 import PostDropdown from "./PostDropdown";
 import CommentsArea from "./CommentsArea";
 import "./styles/FeedPage.css";
+import { withRouter } from "react-router-dom";
+
 class FeedPage extends React.Component {
   state = {
     postArray: [],
@@ -214,7 +216,15 @@ class FeedPage extends React.Component {
                     style={{ backgroundColor: "white" }}
                   >
                     <Row className="userPostRow mt-2">
-                      <Col sm={2} className="containerProPicPost">
+                      <Col
+                        sm={2}
+                        className="containerProPicPost"
+                        onClick={() =>
+                          this.props.history.push(
+                            "/profile/" + post.user_id._id
+                          )
+                        }
+                      >
                         <img
                           src={post.user_id.image}
                           className="profilePicPost"
@@ -222,7 +232,15 @@ class FeedPage extends React.Component {
                           alt="profile pic"
                         />
                       </Col>
-                      <Col sm={9} className="containerAuthorPost">
+                      <Col
+                        sm={9}
+                        className="containerAuthorPost"
+                        onClick={() =>
+                          this.props.history.push(
+                            "/profile/" + post.user_id._id
+                          )
+                        }
+                      >
                         <Row className="postUsername">
                           <p>{post.user_id.username}</p>
                         </Row>
@@ -365,4 +383,4 @@ class FeedPage extends React.Component {
   }
 }
 
-export default FeedPage;
+export default withRouter(FeedPage);
