@@ -24,18 +24,23 @@ class Register extends React.Component {
     username: "",
     password: "",
     validated: false,
+    picPreview:
+      "https://res.cloudinary.com/dhmw620tl/image/upload/v1611860794/benchmark3/kpixrojy3o5pwu6kz2eu.png",
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
+      this.setState({
+        picPreview:
+          "https://res.cloudinary.com/dhmw620tl/image/upload/v1611908045/benchmark3/cheems-with-gun_kzmccb.jpg",
+      });
       e.stopPropagation();
-    }
-    this.setState({ validated: true });
-    if (this.state.validated) {
+    } else {
       this.postProfile();
     }
+    this.setState({ validated: true });
   };
 
   postProfile = async () => {
@@ -177,25 +182,30 @@ class Register extends React.Component {
                       src={
                         this.state.image
                           ? URL.createObjectURL(this.state.image)
-                          : "https://res.cloudinary.com/dhmw620tl/image/upload/v1611860794/benchmark3/kpixrojy3o5pwu6kz2eu.png"
+                          : this.state.picPreview
                       }
                       alt="profile"
                     />
                   </Form.Row>
                   <Form.Row>
-                    <Form.Label htmlFor="postImage">
-                      <MdAddAPhoto />
-                    </Form.Label>
-                    <Form.Control
-                      type="file"
-                      className="visually-hidden"
-                      id="postImage"
-                      accept="image/*"
-                      required
-                      onChange={(e) =>
-                        this.setState({ image: e.target.files[0] })
-                      }
-                    />
+                    <Form.Group className="d-flex flex-column align-items-center">
+                      <Form.Label htmlFor="postImage">
+                        <MdAddAPhoto />
+                      </Form.Label>
+                      <Form.Control
+                        type="file"
+                        className="visually-hidden"
+                        id="postImage"
+                        accept="image/*"
+                        required
+                        onChange={(e) =>
+                          this.setState({ image: e.target.files[0] })
+                        }
+                      />
+                      <Form.Control.Feedback type="invalid">
+                        Please provide a profile image
+                      </Form.Control.Feedback>
+                    </Form.Group>
                   </Form.Row>
                 </Col>
               </Form.Row>
