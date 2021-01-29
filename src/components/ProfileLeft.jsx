@@ -25,18 +25,11 @@ class ProfileLeft extends React.Component {
     user: "",
     experiences: [],
     loading: true,
-    showAlert: false,
   };
 
   componentDidMount = () => {
     this.fetchProfile();
   };
-
-  toggleAlert() {
-    this.setState((state) => ({
-      showAlert: !state.showAlert,
-    }));
-  }
 
   fetchProfile = async () => {
     try {

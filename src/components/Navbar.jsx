@@ -6,7 +6,6 @@ import { IoBagRemove } from "react-icons/io5";
 import { AiFillMessage } from "react-icons/ai";
 import { IoMdNotifications } from "react-icons/io";
 import { GrSchedulePlay } from "react-icons/gr";
-import abdul from "../components/abdul.jpeg";
 import "./styles/Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import WorkAlert from "./WorkAlert";

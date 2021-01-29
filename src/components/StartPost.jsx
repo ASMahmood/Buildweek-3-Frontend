@@ -63,7 +63,6 @@ class StartPost extends Component {
         console.log(hope);
         await this.postImage(hope);
       } else if (response.ok) {
-        alert("Post sent !");
         this.setState({
           post: { text: "" },
           image: null,
@@ -105,7 +104,6 @@ class StartPost extends Component {
         console.log("post a pic");
         this.handleClose();
         if (response.ok) {
-          alert("Post sent with image !");
           this.setState({
             post: { text: "" },
             image: null,
