@@ -25,7 +25,7 @@ class Register extends React.Component {
     password: "",
     validated: false,
     picPreview:
-      "https://res.cloudinary.com/dhmw620tl/image/upload/v1611860794/benchmark3/kpixrojy3o5pwu6kz2eu.png",
+      "https://res.cloudinary.com/dhmw620tl/image/upload/v1611844662/benchmark3/kpcgpk6lhy2qlzqkdb2f.gif",
   };
 
   handleSubmit = (e) => {
