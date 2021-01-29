@@ -6,7 +6,6 @@ import { IoBagRemove } from "react-icons/io5";
 import { AiFillMessage } from "react-icons/ai";
 import { IoMdNotifications } from "react-icons/io";
 import { GrSchedulePlay } from "react-icons/gr";
-import abdul from "../components/abdul.jpeg";
 import "./styles/Navbar.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import WorkAlert from "./WorkAlert";
@@ -15,7 +14,7 @@ import Search from "./Search";
 
 import { withRouter, NavLink, Link } from "react-router-dom";
 
-class Navbar extends React.Component {
+class NavbarApp extends React.Component {
   state = {
     user: {},
   };
@@ -231,4 +230,4 @@ class Navbar extends React.Component {
   }
 }
 
-export default withRouter(Navbar);
+export default withRouter(NavbarApp);

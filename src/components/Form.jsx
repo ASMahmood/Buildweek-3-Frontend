@@ -1,5 +1,5 @@
 import React from "react";
-import { Modal, Button, Form } from "react-bootstrap";
+import { Modal, Button, Form, Spinner } from "react-bootstrap";
 import { GrAdd } from "react-icons/gr";
 import { BiPencil } from "react-icons/bi";
 import "./styles/Form.css";
@@ -9,6 +9,7 @@ class FormModal extends React.Component {
     super(props);
     this.state = {
       show: false,
+      loading: false,
       selectedFile: null,
       experience:
         this.props.method === "PUT"
@@ -29,6 +30,7 @@ class FormModal extends React.Component {
 
   sendData = async (e) => {
     e.preventDefault();
+    this.setState({ loading: true });
     if (this.props.method === "POST") {
       await this.postExperience();
       await this.fetchExpImg(this.state.experience._id);
@@ -283,7 +285,11 @@ class FormModal extends React.Component {
               Delete
             </Button>
             <Button variant="primary" onClick={(e) => this.sendData(e)}>
-              Save
+              {this.state.loading ? (
+                <Spinner animation="border" size="sm" variant="light" />
+              ) : (
+                "Save"
+              )}
             </Button>
           </Modal.Footer>
         </Modal>

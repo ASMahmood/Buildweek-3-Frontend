@@ -10,7 +10,6 @@ class HomeProfile extends React.Component {
     user: "",
   };
 
-
   render() {
     return (
       <div id="wrapper">
@@ -19,7 +18,7 @@ class HomeProfile extends React.Component {
           <img src={this.props.user.image} alt="profile" class="profile-img" />
           <div
             class="profile-info"
-            onClick={() => this.props.history.push("/")}
+            onClick={() => this.props.history.push("/me")}
             style={{ cursor: "pointer" }}
           >
             <h6>
@@ -50,9 +49,7 @@ class HomeProfile extends React.Component {
             </Col>
           </Row>
           <hr />
-          <div
-            class="profile-saved-items"
-          >
+          <div class="profile-saved-items">
             <Row>
               <Col xs={1}>
                 <BsFillBookmarkFill

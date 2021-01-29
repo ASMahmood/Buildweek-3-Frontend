@@ -3,6 +3,7 @@ import { Container, Row, Button, Form , Col} from "react-bootstrap";
 import "./styles/FeedPage.css"
 import { AiOutlineComment } from "react-icons/ai";
 
+
 export default class CommentsArea extends Component {
   state = {
     showComments: false,
@@ -17,8 +18,10 @@ export default class CommentsArea extends Component {
   render() {
     return (
       <>
+
         <p className = "commentsButton"onClick={() => this.showComments()}>
           <AiOutlineComment color={"#3F3F3F"}/>{this.props.post.comments.length}
+
         </p>
 
         <Container className={this.state.showComments ? "" : "d-none"}>
@@ -50,16 +53,17 @@ export default class CommentsArea extends Component {
                 className = "commentInputField"
               ></Form.Control>
               </Form.Group>
+
               </Col>
-              <Col sm = {2}>
-              <Button
-                id="addCommentBtn"
-                onClick={() => this.props.addComment(this.props.post._id)}
-              >
-                Submit{" "}
-              </Button>
+              <Col sm={2}>
+                <Button
+                  id="addCommentBtn"
+                  onClick={() => this.props.addComment(this.props.post._id)}
+                >
+                  Submit{" "}
+                </Button>
               </Col>
-              </Row>
+            </Row>
           </Form>
         </Container>
       </>
