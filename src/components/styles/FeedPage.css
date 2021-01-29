@@ -69,9 +69,26 @@
 .singleCommentRow {
   margin-bottom: 20px;
 }
-.addCommentBtn {
-  width: 100%;
+
+#addCommentBtn{
+  border-radius: 0px, 10px, 0px, 0px !important;
+  text-align: center !important;
 }
+.visually-hidden {
+  position: absolute;
+  right: 165px;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+.previewEditImage{
+  display: flex;
+  justify-content:center;
+  width:200px;
+  height: 200px;
+}
+
 .containerProPicPost {
   padding-right: 0px !important;
   padding-left: 15px !important;
@@ -82,3 +99,4 @@
   padding-left: 12px !important;
   padding-right: 12px !important;
 }
+
