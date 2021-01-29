@@ -8,7 +8,6 @@ import AttachFileIcon from "@material-ui/icons/AttachFile";
 import Likes from "./Likes";
 import PostDropdown from "./PostDropdown";
 import CommentsArea from "./CommentsArea";
-
 import "./styles/FeedPage.css";
 class FeedPage extends React.Component {
   state = {
@@ -48,6 +47,26 @@ class FeedPage extends React.Component {
       method: "DELETE",
     });
     this.fetchPosts();
+  }
+  editComment = async(commentId,commentText) =>{
+    try{
+      const response = await fetch(
+        process.env.REACT_APP_SERVER +
+          `/comment/${commentId}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(commentText),
+        }
+      );
+    }catch(e){
+    console.log(e)
+    }
+   
+   
+
   }
   postImage = async (postId) => {
     try {
@@ -268,11 +287,13 @@ class FeedPage extends React.Component {
                     </Row>
 
                     <CommentsArea
+                    fetchPosts={this.fetchPosts}
                       username= {this.state.user.username}
                       post={post}
                       deleteComment={this.deleteComment}
                       addCommentInState={this.addCommentInState}
                       addComment={this.addComment}
+                      editComment={this.editComment}
                     />
                   </Container>
                 ))}
