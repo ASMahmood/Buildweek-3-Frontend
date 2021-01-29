@@ -61,11 +61,11 @@ class Likes extends React.Component {
 
   render() {
     return (
-      <div>
+      <div style={{marginRight:"10px"}}> 
         <AiOutlineLike
-          color={this.state.liked ? "blue" : "black"}
+          color={this.state.liked ? "blue" : "#3F3F3F"}
           onClick={this.handleLike}
-        />{" "}
+        />{""}{""}
         <span className="text-muted">
           {this.props.likes.length === 0
             ? " Be the first to like."
