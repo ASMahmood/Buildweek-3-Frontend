@@ -35,8 +35,8 @@ export default class CommentsArea extends Component {
                   alt="profile"
                 />
                 </div>
-                <p className="mr-1" style={{fontWeight:"700"}}>{comment.user_id[0].username}:</p>
-                <p >{comment.text}</p>
+                <p className="mr-1" style={{marginTop:"2px",fontWeight:"700"}}>{comment.user_id[0].username}: <span style={{fontWeight:"300"}}> {comment.text}</span></p>
+                
               </Row>
             ))}
           <Form>
