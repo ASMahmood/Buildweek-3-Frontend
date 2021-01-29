@@ -6,29 +6,32 @@ import "./Footer.css";
 import Footer from "./components/Footer";
 import NavbarApp from "./components/Navbar";
 import ProfilePage from "./components/ProfilePage";
-import { BrowserRouter, Route } from "react-router-dom";
+import { withRouter, Route } from "react-router-dom";
 import OtherProfile from "./components/OtherProfile";
 import FeedPage from "./components/FeedPage";
 import SignIn from "./components/SignIn";
+import Register from "./components/Register";
+
+const exclusionArray = ["/", "/register"];
 
 class App extends React.Component {
   render() {
     return (
-      <BrowserRouter>
-        
+      <>
+        {exclusionArray.indexOf(this.props.location.pathname) < 0 && (
+          <NavbarApp />
+        )}
 
-        <NavbarApp />
         <Route path="/me" exact component={ProfilePage} />
         <Route path="/profile/:id" component={OtherProfile} />
         <Route path="/feed" exact render={(props) => <FeedPage {...props} />} />
-        <Footer />
-   
-        
+
+        {exclusionArray.indexOf(this.props.location.pathname) < 0 && <Footer />}
         <Route path="/" exact component={SignIn} />
-        
-      </BrowserRouter>
+        <Route path="/register" exact component={Register} />
+      </>
     );
   }
 }
 
-export default App;
+export default withRouter(App);

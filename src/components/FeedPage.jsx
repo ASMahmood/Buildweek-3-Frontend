@@ -3,14 +3,11 @@ import { Container, Row, Col, Button, Modal, Form } from "react-bootstrap";
 import CreateFeed from "./CreateFeed";
 import HomeProfile from "./HomeProfile";
 import HomeRight from "./HomeRight";
-import { RiPencilFill } from "react-icons/ri";
-import { AiOutlineDelete } from "react-icons/ai";
 import Moment from "react-moment";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
 import Likes from "./Likes";
 import PostDropdown from "./PostDropdown";
 import CommentsArea from "./CommentsArea";
-
 
 import "./styles/FeedPage.css";
 class FeedPage extends React.Component {
@@ -23,7 +20,6 @@ class FeedPage extends React.Component {
     user: {},
     image: null,
     commentToAdd: "",
-
   };
 
   deletePost = async (id) => {
@@ -70,7 +66,6 @@ class FeedPage extends React.Component {
           });
           this.fetchPosts();
           this.setState({ show: false });
-
         }
       }
     } catch (error) {
@@ -199,6 +194,7 @@ class FeedPage extends React.Component {
                           src={post.user_id.image}
                           className="profilePicPost"
                           style={{ objectFit: "cover" }}
+                          alt="profile pic"
                         />{" "}
                       </Col>
                       <Col sm={9}>
@@ -237,8 +233,10 @@ class FeedPage extends React.Component {
                         {post.image !== "default" && (
                           <img
                             className="imageForPost"
-                            style={{ objectFit: "cover" }}
+                            style={{ objectFit: "contain" }}
+                            crossorigin="anonymous"
                             src={post.image}
+                            alt="post"
                           />
                         )}
                       </Col>
@@ -257,7 +255,6 @@ class FeedPage extends React.Component {
                       addCommentInState={this.addCommentInState}
                       addComment={this.addComment}
                     />
-
                   </Container>
                 ))}
               </Row>

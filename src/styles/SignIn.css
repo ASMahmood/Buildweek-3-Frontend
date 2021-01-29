@@ -8,12 +8,30 @@
   z-index: 100;
 }
 
-#signInPage .navbar{
+#signInPage .navbar {
   padding: 0;
 }
 
 #signInPage .Linkedin-icon {
   color: #0a66c2;
+}
+
+#signInPage .visually-hidden {
+  position: absolute;
+  right: 165px;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+}
+
+#signInPage img.preview {
+  height: 150px;
+  object-fit: contain;
+}
+
+#signInPage hr {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .logoTitle {
@@ -33,6 +51,13 @@
   background-color: rgba(0, 0, 0, 0.2);
   color: rgba(0, 0, 0, 1);
   border: white solid 1px;
+}
+.registerNav:focus,
+.registerNav:active {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  border: transparent solid 1px !important;
+  color: rgba(0, 0, 0, 1) !important;
+  box-shadow: none !important;
 }
 .signInNav {
   background-color: transparent;
@@ -56,9 +81,9 @@
   border: #0a66c2 solid 1px;
 }
 
-.welcomePage{
+.welcomePage {
   font-size: 56px;
-  color: #2977C9;
+  color: #2977c9;
   font-weight: 400;
   line-height: 70px;
 }
@@ -69,7 +94,7 @@
   z-index: 5;
 }
 
-.formCol{
+.formCol {
   z-index: 7;
 }
 
@@ -80,7 +105,7 @@
   padding-bottom: 5px;
 }
 
-.submitSignIn{
+.submitSignIn {
   border-radius: 100px;
   background-color: #0a66c2;
   font-size: 20px;
@@ -90,8 +115,32 @@
   background-color: #004182;
 }
 
-.submitSignIn:focus, .submitSignIn:active {
-  background-color: #09223b!important;
+.submitSignIn:focus,
+.submitSignIn:active {
+  background-color: #09223b !important;
+  box-shadow: none !important;
+}
+
+.submitRegister {
+  border-radius: 100px;
+  color: rgba(0, 0, 0, 0.6);
+  background-color: white;
+  border: rgba(0, 0, 0, 0.6) solid 1px;
+  font-weight: 500;
+  font-size: 20px;
+}
+
+.submitRegister:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+  color: rgba(0, 0, 0, 1);
+  border: rgba(0, 0, 0, 0.2) solid 1px;
+}
+
+.submitRegister:focus,
+.submitRegister:active {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  border: transparent solid 1px !important;
+  color: rgba(0, 0, 0, 1) !important;
   box-shadow: none !important;
 }
 
@@ -106,12 +155,12 @@
   z-index: 5;
 }
 
-.bg-colour-change{
+.bg-colour-change {
   position: fixed;
   top: 70vh;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #FAF9F7;
-  z-index: 5;
+  background-color: #faf9f7;
+  z-index: -1;
 }
