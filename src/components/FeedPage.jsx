@@ -20,7 +20,7 @@ class FeedPage extends React.Component {
     user: {},
     image: null,
     commentToAdd: "",
-    postImageEdit:false
+    postImageEdit: false,
   };
 
   deletePost = async (id) => {
@@ -61,7 +61,6 @@ class FeedPage extends React.Component {
         );
         console.log("post a pic");
         if (response.ok) {
-          alert("Post sent with image !");
           this.setState({
             image: null,
           });
@@ -158,7 +157,6 @@ class FeedPage extends React.Component {
         }),
       });
       console.log(response);
-      alert("Post sent !");
       this.setState({
         commentToAdd: "",
       });
@@ -177,7 +175,10 @@ class FeedPage extends React.Component {
             </Col>
             <Col md={6} id="feedMiddleColumn">
               <Row id="posterBit" style={{ width: "112%", marginLeft: "-5%" }}>
-                <CreateFeed fetchPosts={this.fetchPosts} />
+                <CreateFeed
+                  fetchPosts={this.fetchPosts}
+                  user={this.state.user}
+                />
               </Row>
               <hr
                 style={{
@@ -197,11 +198,11 @@ class FeedPage extends React.Component {
                         <img
                           src={post.user_id.image}
                           className="profilePicPost"
-                          style={{ objectFit: "cover", marginTop: "0.5rem"}}
+                          style={{ objectFit: "cover", marginTop: "0.5rem" }}
                           alt="profile pic"
                         />
                       </Col>
-                      <Col  sm={9} className="containerAuthorPost">
+                      <Col sm={9} className="containerAuthorPost">
                         <Row className="postUsername">
                           <p>{post.user_id.username}</p>
                         </Row>
@@ -230,7 +231,6 @@ class FeedPage extends React.Component {
                     </Row>
                     <Row>
                       <Col className="postText">
-                        
                         <p>{post.text}</p>
                       </Col>
                     </Row>
@@ -238,13 +238,12 @@ class FeedPage extends React.Component {
                       <Col className="d-flex justify-content-center p-0">
                         {" "}
                         {post.image !== "default" && (
-                          <img 
+                          <img
                             className="img-fluid"
                             style={{
                               objectFit: "contain",
                               width: "100%",
                               height: "auto",
-                             
                             }}
                             crossorigin="anonymous"
                             src={post.image}
@@ -296,16 +295,19 @@ class FeedPage extends React.Component {
                 />
               </Form.Group>
             </Form>
-            
-            {this.state.postImageEdit &&
-            <Row className = "d-flex justify-content-center"> <img
-            className = "previewEditImage "
-                    src={URL.createObjectURL(
-                      document.querySelector("#postImage").files[0]
-                    )}
-                    alt="img-preview"
-                  /> </Row>}
-            
+
+            {this.state.postImageEdit && (
+              <Row className="d-flex justify-content-center">
+                {" "}
+                <img
+                  className="previewEditImage "
+                  src={URL.createObjectURL(
+                    document.querySelector("#postImage").files[0]
+                  )}
+                  alt="img-preview"
+                />{" "}
+              </Row>
+            )}
           </Modal.Body>
           <Modal.Footer>
             <Form.Label htmlFor="postImage">
@@ -316,7 +318,9 @@ class FeedPage extends React.Component {
               className="visually-hidden"
               id="postImage"
               accept="image/*"
-              onChange={(e) => this.setState({ image: e.target.files[0] ,postImageEdit:true})}
+              onChange={(e) =>
+                this.setState({ image: e.target.files[0], postImageEdit: true })
+              }
             />
             <Button
               variant="secondary"
