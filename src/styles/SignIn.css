@@ -16,7 +16,7 @@
   color: #0a66c2;
 }
 
-#signInPage .visually-hidden {
+.visually-hidden {
   position: absolute;
   right: 165px;
   height: 1px;

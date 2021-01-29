@@ -39,8 +39,10 @@ class EditIntro extends Component {
       const parsedResponse = await response.json();
       console.log("parsedResponse edti intro", parsedResponse);
       if (response.ok) {
-        this.setModalShow(false);
-        this.props.fetchProfile();
+        setTimeout(() => {
+          this.props.fetchProfile();
+          this.setModalShow(false);
+        }, 3000);
       }
     } catch (error) {
       console.log(error);
@@ -110,7 +112,14 @@ class EditIntro extends Component {
               </div>
               <div className="profilePic">
                 {this.props.userInfo !== "" ? (
-                  <img src={this.props.userInfo.image} alt="profilePic" />
+                  <img
+                    src={
+                      this.state.userImage
+                        ? URL.createObjectURL(this.state.userImage)
+                        : this.props.userInfo.image
+                    }
+                    alt="profilePic"
+                  />
                 ) : (
                   <img
                     src="/assets/images/user-placeholder.png"
