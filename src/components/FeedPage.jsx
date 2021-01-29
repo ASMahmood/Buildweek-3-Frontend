@@ -42,17 +42,16 @@ class FeedPage extends React.Component {
       console.log("problem with getting psots ->", error);
     }
   };
-  deleteComment = async(commentId) => {
+  deleteComment = async (commentId) => {
     await fetch(process.env.REACT_APP_SERVER + `/comment/${commentId}`, {
       method: "DELETE",
     });
     this.fetchPosts();
-  }
-  editComment = async(commentId,commentText) =>{
-    try{
+  };
+  editComment = async (commentId, commentText) => {
+    try {
       const response = await fetch(
-        process.env.REACT_APP_SERVER +
-          `/comment/${commentId}`,
+        process.env.REACT_APP_SERVER + `/comment/${commentId}`,
         {
           method: "PUT",
           headers: {
@@ -61,13 +60,10 @@ class FeedPage extends React.Component {
           body: JSON.stringify(commentText),
         }
       );
-    }catch(e){
-    console.log(e)
+    } catch (e) {
+      console.log(e);
     }
-   
-   
-
-  }
+  };
   postImage = async (postId) => {
     try {
       let post = new FormData();
@@ -276,29 +272,25 @@ class FeedPage extends React.Component {
                         )}
                       </Col>
                     </Row>
-                    
-                    <Row style={{paddingLeft:"14px", marginTop:"10px"}}>
-                      <Likes 
+
+                    <Row style={{ paddingLeft: "14px", marginTop: "10px" }}>
+                      <Likes
                         likes={post.likes}
                         postID={post._id}
                         fetchPosts={this.fetchPosts}
                       />
 
+                      <CommentsArea
+                        fetchPosts={this.fetchPosts}
+                        username={this.state.user.username}
+                        className="commentPost"
+                        post={post}
+                        deleteComment={this.deleteComment}
+                        addCommentInState={this.addCommentInState}
+                        addComment={this.addComment}
+                        editComment={this.editComment}
+                      />
                     </Row>
-
-                    <CommentsArea
-                      fetchPosts={this.fetchPosts}
-                      username= {this.state.user.username}
-                      className="commentPost"
-                      post={post}
-                      deleteComment={this.deleteComment}
-                      addCommentInState={this.addCommentInState}
-                      addComment={this.addComment}
-                      editComment={this.editComment}
-                    />
-                    </Row>
-
-                    
                   </Container>
                 ))}
               </Row>
