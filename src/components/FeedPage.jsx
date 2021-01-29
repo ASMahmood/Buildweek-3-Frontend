@@ -3,8 +3,6 @@ import { Container, Row, Col, Button, Modal, Form } from "react-bootstrap";
 import CreateFeed from "./CreateFeed";
 import HomeProfile from "./HomeProfile";
 import HomeRight from "./HomeRight";
-import { RiPencilFill } from "react-icons/ri";
-import { AiOutlineDelete } from "react-icons/ai";
 import Moment from "react-moment";
 import AttachFileIcon from "@material-ui/icons/AttachFile";
 import Likes from "./Likes";
@@ -195,7 +193,8 @@ class FeedPage extends React.Component {
                         <img
                           src={post.user_id.image}
                           className="profilePicPost"
-                          style={{ objectFit: "cover", marginTop:"0.5rem" }}/>{" "}
+                          style={{ objectFit: "cover", marginTop:"0.5rem" }}/>
+                        alt="profile pic"{" "}
                       </Col>
                       <Col sm={9}>
                         <Row className="postUsername">
@@ -236,9 +235,10 @@ class FeedPage extends React.Component {
                         {post.image !== "default" && (
                           <img
                             className="imageForPost"
-                            style={{ objectFit: "cover",width:"57vh", height: "auto" }}
+                            style={{ objectFit: "contain",width:"57vh", height: "auto" }}
                             crossorigin="anonymous"
                             src={post.image}
+                            alt="post"
                           />
                         )}
                       </Col>

@@ -51,7 +51,8 @@ class StartPost extends Component {
           username: "ASMahmood",
           user_id: localStorage.getItem("profileID"),
           comments: [],
-          image: this.state.image,
+          image:
+            typeof this.state.image !== "string" ? "default" : this.state.image,
         }),
         headers: new Headers({
           "Content-Type": "application/json",
