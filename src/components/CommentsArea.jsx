@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Container, Row, Button, Form } from "react-bootstrap";
+import { Container, Row, Button, Form , Col} from "react-bootstrap";
+import "./styles/FeedPage.css"
 
 export default class CommentsArea extends Component {
   state = {
@@ -15,7 +16,7 @@ export default class CommentsArea extends Component {
   render() {
     return (
       <>
-        <p onClick={() => this.showComments()}>
+        <p className = "commentsButton"onClick={() => this.showComments()}>
           Comments {this.props.post.comments.length}
         </p>
 
@@ -32,22 +33,29 @@ export default class CommentsArea extends Component {
               </Row>
             ))}
           <Form>
-            <Form.Group controlId="exampleForm.ControlInput1">
-              <Form.Label>Add a comment</Form.Label>
+          <Row noGutters = {true}>
+            <Col sm = {10}>
+            <Form.Group controlId="exampleForm.ControlInput1" >
+          
               <Form.Control
                 type="text"
-                placeholder="Your comment"
+                placeholder="Add a comment"
                 onChange={(e) =>
                   this.props.addCommentInState(e, this.props.post._id)
                 }
+                className = "commentInputField"
               ></Form.Control>
+              </Form.Group>
+              </Col>
+              <Col sm = {2}>
               <Button
-                className="addCommentBtn"
+                id="addCommentBtn"
                 onClick={() => this.props.addComment(this.props.post._id)}
               >
-                Submit Comment{" "}
+                Submit{" "}
               </Button>
-            </Form.Group>
+              </Col>
+              </Row>
           </Form>
         </Container>
       </>

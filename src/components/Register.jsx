@@ -130,7 +130,12 @@ class Register extends React.Component {
                       onChange={(e) =>
                         this.setState({ password: e.currentTarget.value })
                       }
-                    />
+                    /> <Form.Control.Feedback>
+                    Unbreakable! Nice one!
+                  </Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">
+                    Password needed! 
+                  </Form.Control.Feedback>
                   </Form.Group>
                   <Form.Group>
                     <Form.Control
@@ -142,6 +147,12 @@ class Register extends React.Component {
                         this.setState({ username: e.currentTarget.value })
                       }
                     />
+                    <Form.Control.Feedback>
+                    Memorable!
+                  </Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">
+                    No Username? Are you so sad?
+                  </Form.Control.Feedback>
                   </Form.Group>
                   <Form.Row>
                     <Col xs={6}>
@@ -155,6 +166,10 @@ class Register extends React.Component {
                             this.setState({ name: e.currentTarget.value })
                           }
                         />
+                        
+                  <Form.Control.Feedback type="invalid">
+                    Go grab your ID!
+                  </Form.Control.Feedback>
                       </Form.Group>
                     </Col>
                     <Col xs={6}>
@@ -221,6 +236,12 @@ class Register extends React.Component {
                         this.setState({ title: e.currentTarget.value })
                       }
                     />
+                    <Form.Control.Feedback>
+                    Is it a real title?
+                  </Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">
+                    Just invent one! 
+                  </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
                 <Col xs={6}>
@@ -234,6 +255,12 @@ class Register extends React.Component {
                         this.setState({ area: e.currentTarget.value })
                       }
                     />
+                    <Form.Control.Feedback>
+                    Cool! I've been there on holiday
+                  </Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">
+                    No Idea? Just open Google Maps
+                  </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
               </Form.Row>
@@ -249,6 +276,12 @@ class Register extends React.Component {
                         this.setState({ bio: e.currentTarget.value })
                       }
                     />
+                    <Form.Control.Feedback>
+                    Cool Story Bro!
+                  </Form.Control.Feedback>
+                  <Form.Control.Feedback type="invalid">
+                    It's important for us to know how boring is your life
+                  </Form.Control.Feedback>
                   </Form.Group>
                 </Col>
               </Form.Row>
