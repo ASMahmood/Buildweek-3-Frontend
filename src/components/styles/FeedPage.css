@@ -62,15 +62,30 @@
 .commentProfilePic {
   width: 50px;
   height: 50px;
+  border: 2px black !important;
   border-radius: 50px;
-  margin-top: -10px;
   margin-right: 10px;
-}
-.singleCommentRow {
-  margin-bottom: 20px;
+  margin-left: -10px;
 }
 
-#addCommentBtn{
+.commentImageBorder {
+  width: 50px;
+  height: 50px;
+  border: 2px black !important;
+  border-radius: 50px;
+  margin-right: 10px;
+  margin-left: -10px;
+  z-index: 2;
+}
+.singleCommentRow {
+  margin-right: 12px;
+  margin-left: 1px;
+  margin-bottom: 25px;
+  border-radius: 0px 50px 50px 0px;
+  background-color: #f2f2f2;
+}
+
+#addCommentBtn {
   border-radius: 0px, 10px, 0px, 0px !important;
   text-align: center !important;
 }
@@ -82,10 +97,10 @@
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
 }
-.previewEditImage{
+.previewEditImage {
   display: flex;
-  justify-content:center;
-  width:200px;
+  justify-content: center;
+  width: 200px;
   height: 200px;
 }
 
@@ -100,6 +115,19 @@
   padding-right: 12px !important;
 }
 
+
 .emoji{
   font-size:16.5px
 }
+
+.commentInputField {
+  margin-left: -8px !important;
+  border-radius: 10px 0 0 10px;
+}
+
+#addCommentBtn {
+  margin-left: -8px;
+  width: 85px;
+  border-radius: 0 50px 50px 0px;
+}
+

@@ -1,5 +1,5 @@
 import { Component } from "react";
-import { Image, Modal, Form, Col, Button } from "react-bootstrap";
+import { Image, Modal, Form, Col, Button, Spinner } from "react-bootstrap";
 import { AiOutlinePlus } from "react-icons/ai";
 import { BiPencil } from "react-icons/bi";
 import { Link } from "react-router-dom";
@@ -9,6 +9,7 @@ class EditIntro extends Component {
     show: false,
     user: this.props.userInfo,
     userImage: null,
+    loading: false,
   };
 
   setModalShow = (bool) => this.setState({ show: bool });
@@ -21,6 +22,7 @@ class EditIntro extends Component {
 
   EditUserInfos = async (e) => {
     e.preventDefault();
+    this.setState({ loading: true });
     this.updateProfilePic();
 
     const url =
@@ -41,6 +43,7 @@ class EditIntro extends Component {
       if (response.ok) {
         setTimeout(() => {
           this.props.fetchProfile();
+          this.setState({ loading: false });
           this.setModalShow(false);
         }, 3000);
       }
@@ -130,6 +133,7 @@ class EditIntro extends Component {
                   <input
                     type="file"
                     id="user-image"
+                    accept="image/*"
                     onChange={(e) => this.updateUserIMG(e)}
                   />
                 </>
@@ -218,7 +222,11 @@ class EditIntro extends Component {
 
               <div className="text-right">
                 <Button variant="primary" type="submit">
-                  Save
+                  {this.state.loading ? (
+                    <Spinner animation="border" size="sm" variant="light" />
+                  ) : (
+                    "Save"
+                  )}
                 </Button>
               </div>
             </Form>

@@ -13,7 +13,10 @@ class CreateFeed extends Component {
     return (
       <div className="create-feed">
         <Container className="feed-wrapper" fetchPosts={this.props.fetchPosts}>
-          <StartPost fetchPosts={this.props.fetchPosts} />
+          <StartPost
+            fetchPosts={this.props.fetchPosts}
+            user={this.props.user}
+          />
           <div className="feed-icons-wrapper mt-3">
             <div className="pic-icon d-flex text-center">
               <AiFillPicture />

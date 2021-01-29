@@ -1,7 +1,9 @@
 .feed-btn {
   border-radius: 30px;
   margin-left: 15px;
-  width: 20%;
+  background-color: rgba(0, 0, 0, 0.1);
+  color: rgba(0, 0, 0, 0.3);
+  border: transparent solid 1px;
   height: 2rem;
   font-weight: 600;
   display: flex;
@@ -12,7 +14,7 @@
 .feed-btn-wrapper {
   display: flex;
   justify-content: flex-end;
-  width: 100%;
+
   position: relative;
 }
 
@@ -28,9 +30,84 @@
 
 .feed-btn-wrapper .visually-hidden {
   position: absolute;
-  right: 165px;
+  left: 50%;
   height: 1px;
   width: 1px;
   overflow: hidden;
   clip: rect(1px, 1px, 1px, 1px);
+}
+
+#createPost .modal-header {
+  padding: 10px 20px;
+  align-items: center;
+}
+#createPost .modal-title {
+  font-weight: 400;
+  font-size: 18px;
+}
+#createPost textarea {
+  font-size: 16px;
+  padding: 0;
+  border: none;
+  resize: none;
+}
+#createPost textarea:focus {
+  font-size: 16px;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+}
+#createPost .hashtag {
+  font-weight: 500;
+  color: #0a66c2;
+}
+#createPost .postIcons {
+  position: relative;
+  width: 35%;
+  padding-right: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-right: rgba(0, 0, 0, 0.3) solid 1px;
+}
+#createPost .form-label {
+  margin-bottom: 0;
+}
+#createPost .react-tenor {
+  border: white 1px solid;
+}
+#createPost .react-tenor--search {
+  border: white 1px solid;
+}
+#createPost .react-tenor--suggestions {
+  display: none;
+}
+#createPost .react-tenor--results {
+  position: absolute;
+  top: 50px;
+  left: -170px;
+}
+#createPost .postTopRow img {
+  margin: 0px 10px;
+  margin-left: 25px;
+  border-radius: 100%;
+  width: 56px;
+  height: 56px;
+  object-fit: cover;
+}
+#createPost .postTopRow .nameBox {
+  display: flex;
+  flex-direction: column;
+
+  color: rgba(0, 0, 0, 0.6);
+}
+
+#creatPost .postTopRow .nameBox h6 {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.8);
+  margin: 0;
+}
+#createPost .postTopRow .nameBox h6:hover {
+  cursor: pointer;
+  text-decoration: underline;
 }
