@@ -192,16 +192,16 @@ class FeedPage extends React.Component {
                     className="postContainer"
                     style={{ backgroundColor: "white" }}
                   >
-                    <Row className="userPostRow">
-                      <Col sm={2}>
+                    <Row className="userPostRow mt-2">
+                      <Col sm={2} className="containerProPicPost">
                         <img
                           src={post.user_id.image}
                           className="profilePicPost"
-                          style={{ objectFit: "cover", marginTop: "0.5rem" }}
+                          style={{ objectFit: "cover", marginTop: "0.5rem"}}
                           alt="profile pic"
                         />
                       </Col>
-                      <Col sm={9}>
+                      <Col  sm={9} className="containerAuthorPost">
                         <Row className="postUsername">
                           <p>{post.user_id.username}</p>
                         </Row>
@@ -229,21 +229,22 @@ class FeedPage extends React.Component {
                       </Col>
                     </Row>
                     <Row>
-                      <Col className="d-flex justify-content-center">
-                        {" "}
+                      <Col className="postText">
+                        
                         <p>{post.text}</p>
                       </Col>
                     </Row>
                     <Row className="imagePostRow">
-                      <Col className="d-flex justify-content-center">
+                      <Col className="d-flex justify-content-center p-0">
                         {" "}
                         {post.image !== "default" && (
-                          <img
-                            className="imageForPost"
+                          <img 
+                            className="img-fluid"
                             style={{
                               objectFit: "contain",
-                              width: "57vh",
+                              width: "100%",
                               height: "auto",
+                             
                             }}
                             crossorigin="anonymous"
                             src={post.image}

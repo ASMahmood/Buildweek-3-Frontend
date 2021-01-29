@@ -69,7 +69,7 @@ class Navbar extends React.Component {
                 <h5
                   style={{
                     fontSize: "0.75rem",
-                    letterSpacing: 1,
+                    letterSpacing: 0.3,
                     marginTop: 2,
                     textDecoration: "none",
                   }}
@@ -84,7 +84,7 @@ class Navbar extends React.Component {
               <h5
                 style={{
                   fontSize: 12,
-                  letterSpacing: 1,
+                  letterSpacing: 0.3,
                   marginTop: 4,
                   fontWeight: 400,
                 }}
@@ -97,7 +97,7 @@ class Navbar extends React.Component {
               <h5
                 style={{
                   fontSize: 12,
-                  letterSpacing: 1,
+                  letterSpacing: 0.3,
                   marginTop: 4,
                   fontWeight: 400,
                 }}
@@ -110,12 +110,12 @@ class Navbar extends React.Component {
               <h5
                 style={{
                   fontSize: 12,
-                  letterSpacing: 1,
+                  letterSpacing: 0.3,
                   marginTop: 4,
                   fontWeight: 400,
                 }}
               >
-                Messagges
+                Messages
               </h5>
             </div>
             <div className="navbar-notifications mx-3 text-center">
@@ -123,7 +123,7 @@ class Navbar extends React.Component {
               <h5
                 style={{
                   fontSize: 12,
-                  letterSpacing: 1,
+                  letterSpacing: 0.3,
                   marginTop: 4,
                   fontWeight: 400,
                 }}
@@ -134,8 +134,13 @@ class Navbar extends React.Component {
             <div className="navbar-profile-menu mx-3 text-center">
               {/* <CgProfile className="icon" /> */}
               <img
-                src={this.state.user.image ? this.state.user.image : abdul}
+                src={
+                  this.state.user.image
+                    ? this.state.user.image
+                    : "https://res.cloudinary.com/dhmw620tl/image/upload/v1611823559/benchmark3/by5k88vrhdasow9oaqar.png"
+                }
                 alt=""
+                style={{ objectFit: "cover" }}
               />
               <Dropdown alignRight>
                 <Dropdown.Toggle id="dropdown-menu-align-right" title="Me">
@@ -151,6 +156,7 @@ class Navbar extends React.Component {
                         <div className="d-flex">
                           <img
                             src={this.state.user.image}
+                            style={{ objectFit: "cover" }}
                             alt=""
                             width="56px"
                             height="56px"
