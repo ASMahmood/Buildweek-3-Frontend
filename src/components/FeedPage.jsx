@@ -199,7 +199,6 @@ class FeedPage extends React.Component {
                           style={{ objectFit: "cover", marginTop: "0.5rem" }}
                           alt="profile pic"
                         />
-                        alt="profile pic"{" "}
                       </Col>
                       <Col sm={9}>
                         <Row className="postUsername">
