@@ -84,7 +84,7 @@ class ProfileLeft extends React.Component {
             </div>
             <div className="profile-info">
               <div className="buttons-row align-items-center">
-                <DropdownProfileMenu />
+                <DropdownProfileMenu username={this.state.user.username} />
 
                 <Button id="moreBtn">More...</Button>
                 {this.state.user ? (

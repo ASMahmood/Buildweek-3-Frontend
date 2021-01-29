@@ -5,6 +5,29 @@ import "./DropdownProfileMenu.css";
 import { withRouter } from "react-router-dom";
 
 class DropdownProfileMenu extends React.Component {
+  generateCV = async () => {
+    try {
+      window.open(
+        process.env.REACT_APP_SERVER +
+          "/profile/" +
+          localStorage.getItem("profileID") +
+          "/profilePDF"
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  experienceCSV = async () => {
+    try {
+      window.open(
+        process.env.REACT_APP_SERVER +
+          "/experience/export/csv/" +
+          this.props.username
+      );
+    } catch (error) {
+      console.log(error);
+    }
+  };
   render() {
     return (
       <Dropdown>
@@ -121,6 +144,12 @@ class DropdownProfileMenu extends React.Component {
               <Accordion.Collapse eventKey="6">
                 <ListGroup variant="flush">
                   <ListGroup.Item>Request a recommendation</ListGroup.Item>
+                  <ListGroup.Item onClick={() => this.generateCV()}>
+                    Generate a CV
+                  </ListGroup.Item>
+                  <ListGroup.Item onClick={() => this.experienceCSV()}>
+                    Export experiences into a CSV
+                  </ListGroup.Item>
                 </ListGroup>
               </Accordion.Collapse>
             </Card>
