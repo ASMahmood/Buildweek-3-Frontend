@@ -187,20 +187,25 @@ class FeedPage extends React.Component {
               />
               <Row className="d-flex justify-content-center">
                 {this.state.postArray.map((post) => (
-                  <Container className="postContainer" style={{backgroundColor:"white"}}>
+                  <Container
+                    className="postContainer"
+                    style={{ backgroundColor: "white" }}
+                  >
                     <Row className="userPostRow">
                       <Col sm={2}>
                         <img
                           src={post.user_id.image}
                           className="profilePicPost"
-                          style={{ objectFit: "cover", marginTop:"0.5rem" }}/>
+                          style={{ objectFit: "cover", marginTop: "0.5rem" }}
+                          alt="profile pic"
+                        />
                         alt="profile pic"{" "}
                       </Col>
                       <Col sm={9}>
                         <Row className="postUsername">
                           <p>{post.user_id.username}</p>
                         </Row>
-                        <Row className="postTitle" >
+                        <Row className="postTitle">
                           <p>{post.user_id.title}</p>
                         </Row>
                         <Row className="postCreatedAt">
@@ -235,7 +240,11 @@ class FeedPage extends React.Component {
                         {post.image !== "default" && (
                           <img
                             className="imageForPost"
-                            style={{ objectFit: "contain",width:"57vh", height: "auto" }}
+                            style={{
+                              objectFit: "contain",
+                              width: "57vh",
+                              height: "auto",
+                            }}
                             crossorigin="anonymous"
                             src={post.image}
                             alt="post"
