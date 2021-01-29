@@ -252,20 +252,22 @@ class FeedPage extends React.Component {
                         )}
                       </Col>
                     </Row>
-
-                    <Row>
-                      <Likes
+                    
+                    <Row style={{paddingLeft:"14px", marginTop:"10px"}}>
+                      <Likes 
                         likes={post.likes}
                         postID={post._id}
                         fetchPosts={this.fetchPosts}
                       />
-                    </Row>
-
-                    <CommentsArea
+                      <CommentsArea
+                      className="commentPost"
                       post={post}
                       addCommentInState={this.addCommentInState}
                       addComment={this.addComment}
                     />
+                    </Row>
+
+                    
                   </Container>
                 ))}
               </Row>
