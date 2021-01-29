@@ -20,6 +20,7 @@ class StartPost extends Component {
       image: "default",
     },
     image: "default",
+    preview: "default",
     errMessage: "",
     loading: false,
   };
@@ -65,6 +66,7 @@ class StartPost extends Component {
         this.setState({
           post: { text: "" },
           image: "default",
+          preview: "default",
           errMessage: "",
         });
         this.props.fetchPosts();
@@ -108,6 +110,7 @@ class StartPost extends Component {
           this.setState({
             post: { text: "" },
             image: "default",
+            preview: "default",
             errMessage: "",
           });
           this.props.fetchPosts();
@@ -167,13 +170,13 @@ class StartPost extends Component {
                   <br />
                 </Form.Group>
               </Form.Row>
-              {this.state.image !== "default" && (
+              {this.state.preview !== "default" && (
                 <div className="imagePreview">
                   <img
                     src={
-                      typeof this.state.image !== "string"
-                        ? URL.createObjectURL(this.state.image)
-                        : this.state.image
+                      typeof this.state.preview !== "string"
+                        ? URL.createObjectURL(this.state.preview)
+                        : this.state.preview
                     }
                     alt="img-preview"
                   />
@@ -196,7 +199,10 @@ class StartPost extends Component {
                     id="postImage"
                     accept="image/*"
                     onChange={(e) =>
-                      this.setState({ image: e.target.files[0] })
+                      this.setState({
+                        image: e.target.files[0],
+                        preview: e.target.files[0],
+                      })
                     }
                   />
 
@@ -208,7 +214,10 @@ class StartPost extends Component {
                   <Tenor
                     token={process.env.REACT_APP_TENOR_TOKEN}
                     onSelect={(result) =>
-                      this.setState({ image: result.media[0].gif.url })
+                      this.setState({
+                        image: result.media[0].gif.url,
+                        preview: result.media[0].gif.preview,
+                      })
                     }
                   />
                   <Button
