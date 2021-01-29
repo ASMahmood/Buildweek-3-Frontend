@@ -43,7 +43,12 @@ class FeedPage extends React.Component {
       console.log("problem with getting psots ->", error);
     }
   };
-
+  deleteComment = async(commentId) => {
+    await fetch(process.env.REACT_APP_SERVER + `/comment/${commentId}`, {
+      method: "DELETE",
+    });
+    this.fetchPosts();
+  }
   postImage = async (postId) => {
     try {
       let post = new FormData();
@@ -263,7 +268,9 @@ class FeedPage extends React.Component {
                     </Row>
 
                     <CommentsArea
+                      username= {this.state.user.username}
                       post={post}
+                      deleteComment={this.deleteComment}
                       addCommentInState={this.addCommentInState}
                       addComment={this.addComment}
                     />

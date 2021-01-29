@@ -24,12 +24,18 @@ export default class CommentsArea extends Component {
           {this.props.post.comments.length > 0 &&
             this.props.post.comments.map((comment) => (
               <Row className="singleCommentRow">
+                <Col sm={11}>
                 <img
                   src={comment.user_id[0].image}
                   className="commentProfilePic"
                   alt="profile"
                 />
                 {comment.user_id[0].username} : {comment.text}{" "}
+                </Col>
+                {comment.user_id[0].username === this.props.username && (<Col sm={1} >
+                  <p onClick={()=> this.props.deleteComment(comment._id)} >x</p>
+                  </Col>)}
+                
               </Row>
             ))}
           <Form>
