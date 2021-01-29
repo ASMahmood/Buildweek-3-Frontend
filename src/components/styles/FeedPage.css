@@ -33,6 +33,9 @@
 .postTitle {
   font-size: 11.5px;
 }
+.postTitle > p {
+  margin: 0;
+}
 .postCreatedAt {
   font-size: 11.5px;
 }
