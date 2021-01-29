@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Container, Row, Button, Form , Col} from "react-bootstrap";
-import "./styles/FeedPage.css"
+import { Container, Row, Button, Form, Col } from "react-bootstrap";
+import "./styles/FeedPage.css";
 
 export default class CommentsArea extends Component {
   state = {
@@ -16,7 +16,7 @@ export default class CommentsArea extends Component {
   render() {
     return (
       <>
-        <p className = "commentsButton"onClick={() => this.showComments()}>
+        <p className="commentsButton" onClick={() => this.showComments()}>
           Comments {this.props.post.comments.length}
         </p>
 
@@ -33,29 +33,28 @@ export default class CommentsArea extends Component {
               </Row>
             ))}
           <Form>
-          <Row noGutters = {true}>
-            <Col sm = {10}>
-            <Form.Group controlId="exampleForm.ControlInput1" >
-          
-              <Form.Control
-                type="text"
-                placeholder="Add a comment"
-                onChange={(e) =>
-                  this.props.addCommentInState(e, this.props.post._id)
-                }
-                className = "commentInputField"
-              ></Form.Control>
-              </Form.Group>
+            <Row noGutters={true}>
+              <Col sm={10}>
+                <Form.Group controlId="exampleForm.ControlInput1">
+                  <Form.Control
+                    type="text"
+                    placeholder="Add a comment"
+                    onChange={(e) =>
+                      this.props.addCommentInState(e, this.props.post._id)
+                    }
+                    className="commentInputField"
+                  ></Form.Control>
+                </Form.Group>
               </Col>
-              <Col sm = {2}>
-              <Button
-                id="addCommentBtn"
-                onClick={() => this.props.addComment(this.props.post._id)}
-              >
-                Submit{" "}
-              </Button>
+              <Col sm={2}>
+                <Button
+                  id="addCommentBtn"
+                  onClick={() => this.props.addComment(this.props.post._id)}
+                >
+                  Submit{" "}
+                </Button>
               </Col>
-              </Row>
+            </Row>
           </Form>
         </Container>
       </>

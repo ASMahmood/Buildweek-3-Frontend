@@ -175,7 +175,10 @@ class FeedPage extends React.Component {
             </Col>
             <Col md={6} id="feedMiddleColumn">
               <Row id="posterBit" style={{ width: "112%", marginLeft: "-5%" }}>
-                <CreateFeed fetchPosts={this.fetchPosts} />
+                <CreateFeed
+                  fetchPosts={this.fetchPosts}
+                  user={this.state.user}
+                />
               </Row>
               <hr
                 style={{
