@@ -137,6 +137,8 @@ const HomeRight = () => {
         </div>
         <h6 className="bottomh6">Click here for more recomandations</h6>
       </div>
+        
+      
     </>
   );
 };
